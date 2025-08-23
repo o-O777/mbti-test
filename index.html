@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园人格AI测试 - MBTI魔改版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 25px;
+            line-height: 1.6;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .dimensions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 20px;
+            background: #f0f4ff;
+        }
+        
+        .dimension {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .dimension h3 {
+            color: #4776E6;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .dimension p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .test-container {
+            padding: 25px;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            display: none;
+        }
+        
+        .question.active {
+            display: block;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: #f8f9fa;
+            border: 2px solid #eaeaea;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            background: #eef4ff;
+            border-color: #4776E6;
+        }
+        
+        .option.selected {
+            background: #eef4ff;
+            border-color: #4776E6;
+            box-shadow: 0 0 0 2px rgba(71, 118, 230, 0.3);
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background: #4776E6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        button:hover {
+            background: #3b62c0;
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #eaeaea;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .result {
+            display: none;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .type-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4776E6;
+            margin: 20px 0;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+        
+        .type-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .guide {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .guide h3 {
+            color: #4776E6;
+            margin-bottom: 15px;
+        }
+        
+        .guide p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .trait {
+            padding: 8px 15px;
+            background: #eef4ff;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .restart {
+            margin-top: 20px;
+            background: #8E54E9;
+        }
+        
+        .restart:hover {
+            background: #7a46c7;
+        }
+        
+        @media (max-width: 600px) {
+            .dimensions {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .type-display {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>校园人格AI测试</h1>
+            <p class="subtitle">MBTI魔改版 · 发现你的学术人格</p>
+        </header>
+        
+        <div class="intro">
+            <p>基于荣格八维理论，AI将传统MBTI维度转化为大学生熟悉的场景。回答12个问题，获取你的个性化"学术生存指南"！</p>
+        </div>
+        
+        <div class="dimensions">
+            <div class="dimension">
+                <h3>E/I: 独处充电型 / 社交续航型</h3>
+                <p>你如何获取和恢复能量？通过社交还是独处？</p>
+            </div>
+            <div class="dimension">
+                <h3>S/N: 实验报告细节控 / 论文框架大师</h3>
+                <p>你更关注细节和现实还是整体和可能性？</p>
+            </div>
+            <div class="dimension">
+                <h3>T/F: 小组作业逻辑怪 / 宿舍情感调解员</h3>
+                <p>你做决定时更依赖逻辑分析还是价值观和谐？</p>
+            </div>
+            <div class="dimension">
+                <h3>J/P: 计划表精准到分钟派 / 佛系随缘流</h3>
+                <p>你更喜欢计划和组织还是灵活和随性？</p>
+            </div>
+        </div>
+        
+        <div class="test-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            
+            <div id="question-container">
+                <!-- 问题将由JavaScript动态生成 -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-btn" disabled>上一题</button>
+                <button id="next-btn">下一题</button>
+            </div>
+        </div>
+        
+        <div class="result" id="result">
+            <h2>你的校园人格类型是</h2>
+            <div class="type-display" id="type-result">ENFP</div>
+            <div class="type-title" id="type-title">社交续航型 · 论文框架大师 · 宿舍情感调解员 · 佛系随缘流</div>
+            
+            <div class="traits">
+                <div class="trait">热情开朗</div>
+                <div class="trait">创意无限</div>
+                <div class="trait">人际高手</div>
+                <div class="trait">灵活适应</div>
+            </div>
+            
+            <div class="guide">
+                <h3>📚 学术生存指南</h3>
+                <p id="guide-content">适合在咖啡厅组队学习，利用社交能量完成作业；论文写作时先搭建创意框架，再补充细节；担任小组情感协调员，但需注意 deadlines；使用灵活的时间管理工具如 Trello，警惕三分钟热度！</p>
+            </div>
+            
+            <button class="restart" id="restart-btn">重新测试</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 问题和选项数据
+            const questions = [
+                {
+                    text: "周末你更倾向于：",
+                    options: [
+                        { text: "参加社团活动或和朋友出行", value: "E" },
+                        { text: "在图书馆或宿舍独自看书或网上冲浪", value: "I" }
+                    ]
+                },
+                {
+                    text: "小组讨论中，你通常：",
+                    options: [
+                        { text: "主动发言并引导话题", value: "E" },
+                        { text: "先倾听他人，再谨慎表达", value: "I" }
+                    ]
+                },
+                {
+                    text: "能量不足时，你如何恢复？",
+                    options: [
+                        { text: "和朋友聊天、外出活动", value: "E" },
+                        { text: "独处休息、整理思绪", value: "I" }
+                    ]
+                },
+                {
+                    text: "完成实验报告时，你更注重：",
+                    options: [
+                        { text: "数据准确和步骤细节", value: "S" },
+                        { text: "结论的创新性和理论延伸", value: "N" }
+                    ]
+                },
+                {
+                    text: "读一篇论文时，你首先会：",
+                    options: [
+                        { text: "逐句阅读，标注细节", value: "S" },
+                        { text: "先看摘要和框架，把握整体", value: "N" }
+                    ]
+                },
+                {
+                    text: "规划项目时，你更倾向于：",
+                    options: [
+                        { text: "列出具体步骤和时间节点", value: "S" },
+                        { text: "构想未来可能性和宏观意义", value: "N" }
+                    ]
+                },
+                {
+                    text: "小组作业出现分歧时，你优先：",
+                    options: [
+                        { text: "分析利弊，选择最优方案", value: "T" },
+                        { text: "照顾成员情绪，寻求共识", value: "F" }
+                    ]
+                },
+                {
+                    text: "朋友向你倾诉烦恼，你会：",
+                    options: [
+                        { text: "理性分析问题根源", value: "T" },
+                        { text: "共情安慰，提供情感支持", value: "F" }
+                    ]
+                },
+                {
+                    text: "评价一件事时，你更依赖：",
+                    options: [
+                        { text: "客观标准和逻辑一致性", value: "T" },
+                        { text: "个人价值观和他人感受", value: "F" }
+                    ]
+                },
+                {
+                    text: "你的每日计划通常是：",
+                    options: [
+                        { text: "详细规划，严格执行", value: "J" },
+                        { text: "灵活安排，随心情调整", value: "P" }
+                    ]
+                },
+                {
+                    text: "面对DDL，你通常：",
+                    options: [
+                        { text: "提前完成，留出缓冲时间", value: "J" },
+                        { text: "临时冲刺，效率爆棚", value: "P" }
+                    ]
+                },
+                {
+                    text: "选择选修课时，你更关注：",
+                    options: [
+                        { text: "课程结构的明确性和考核方式", value: "J" },
+                        { text: "课程内容的趣味性和自由度", value: "P" }
+                    ]
+                }
+            ];
+            
+            // 类型解释和指南
+            const typeGuides = {
+                "ENFP": {
+                    title: "社交续航型 · 论文框架大师 · 宿舍情感调解员 · 随缘佛系流",
+                    guide: "适合在咖啡厅组队学习，利用社交能量完成作业；论文写作时先搭建创意框架，再补充细节；担任小组情感协调员，但需注意 deadlines；使用灵活的时间管理工具如 Trello，警惕三分钟热度！",
+                    traits: ["热情开朗", "创意无限", "人际高手", "灵活适应"]
+                },
+                "ENFJ": {
+                    title: "社交续航型 · 论文框架大师 · 宿舍情感调解员 · 计划精准派",
+                    guide: "适合组织学习小组，善于激励他人；论文注重整体逻辑和人文关怀；天然的情感支持者；喜欢有计划的学习节奏，推荐使用Google日历管理日程。",
+                    traits: ["善于沟通", "有领导力", "关心他人", "有条理"]
+                },
+                "ENTP": {
+                    title: "社交续航型 · 论文框架大师 · 小组作业逻辑怪 · 随缘佛系流",
+                    guide: "适合辩论式学习，通过讨论深化理解；论文创意丰富但需注意细节；擅长分析小组作业的逻辑结构；时间管理随性，适合使用思维导图工具。",
+                    traits: ["头脑灵活", "善于辩论", "创新思维", "自由随性"]
+                },
+                "ENTJ": {
+                    title: "社交续航型 · 论文框架大师 · 小组作业逻辑怪 · 计划精准派",
+                    guide: "适合担任项目组长，善于统筹规划；论文结构严谨、立意高远；决策果断，注重效率；严格的时间管理者，推荐使用Notion全面规划学习生活。",
+                    traits: ["战略思维", "果断坚决", "善于规划", "高效务实"]
+                },
+                "ESFP": {
+                    title: "社交续航型 · 实验报告细节控 · 宿舍情感调解员 · 随缘佛系流",
+                    guide: "适合通过实践活动学习；实验报告细节丰富、数据准确；小组中的气氛担当；学习计划灵活，适合短期冲刺型学习方式。",
+                    traits: ["活泼有趣", "注重现实", "人际和谐", "灵活应变"]
+                },
+                "ESFJ": {
+                    title: "社交续航型 · 实验报告细节控 · 宿舍情感调解员 · 计划精准派",
+                    guide: "适合小组学习，乐于帮助他人；实验报告步骤清晰、格式规范；注重小组和谐与协作；喜欢有计划的学习节奏，推荐使用番茄钟工作法。",
+                    traits: ["乐于助人", "注重细节", "有责任心", "计划性强"]
+                },
+                "ESTP": {
+                    title: "社交续航型 · 实验报告细节控 · 小组作业逻辑怪 · 随缘佛系流",
+                    guide: "适合通过实践和案例学习；实验报告数据翔实、结论务实；善于解决小组中的实际问题；学习方式灵活，适合在运动场边学习边社交。",
+                    traits: ["行动力强", "现实导向", "解决问题", "随机应变"]
+                },
+                "ESTJ": {
+                    title: "社交续航型 · 实验报告细节控 · 小组作业逻辑怪 · 计划精准派",
+                    guide: "适合结构化学习环境；实验报告严谨规范、数据准确；善于组织小组作业流程；严格遵循学习计划，推荐使用时间块管理法。",
+                    traits: ["务实高效", "有条理", "重视规则", "执行力强"]
+                },
+                "INFP": {
+                    title: "独处充电型 · 论文框架大师 · 宿舍情感调解员 · 随缘佛系流",
+                    guide: "适合在安静角落独自学习；论文写作富有创意和深度；默默关心同伴情感需求；学习计划灵活，适合在灵感迸发时高效工作。",
+                    traits: ["理想主义", "深度思考", "善解人意", "灵活自由"]
+                },
+                "INFJ": {
+                    title: "独处充电型 · 论文框架大师 · 宿舍情感调解员 · 计划精准派",
+                    guide: "适合在安静图书馆深度工作；论文结构严谨且富有洞察力；善于洞察他人情感需求；有计划的学习者，推荐使用子弹笔记法。",
+                    traits: ["深度洞察", "富有创意", "关心他人", "有计划性"]
+                },
+                "INTP": {
+                    title: "独处充电型 · 论文框架大师 · 小组作业逻辑怪 · 随缘佛系流",
+                    guide: "适合独自研究复杂问题；论文理论框架创新性强；擅长分析小组作业的逻辑结构；学习时间随意，适合使用知识管理工具如Obsidian。",
+                    traits: ["逻辑性强", "抽象思维", "独立思考", "灵活自由"]
+                },
+                "INTJ": {
+                    title: "独处充电型 · 论文框架大师 · 小组作业逻辑怪 · 计划精准派",
+                    guide: "适合独立研究和战略规划；论文宏观框架清晰、创新性强；善于优化小组作业效率；严格规划学习进程，推荐使用甘特图管理项目。",
+                    traits: ["战略思维", "独立自主", "注重效率", "计划性强"]
+                },
+                "ISFP": {
+                    title: "独处充电型 · 实验报告细节控 · 宿舍情感调解员 · 随缘佛系流",
+                    guide: "适合在舒适安静环境学习；实验报告观察细致、描述准确；默默关心同伴感受；学习方式随性，适合在艺术氛围中工作。",
+                    traits: ["审美敏锐", "注重细节", "体贴他人", "灵活随性"]
+                },
+                "ISFJ": {
+                    title: "独处充电型 · 实验报告细节控 · 宿舍情感调解员 · 计划精准派",
+                    guide: "适合在图书馆安静学习；实验报告细节完美、格式规范；默默支持小组成员；学习计划严谨，推荐使用打卡式学习法。",
+                    traits: ["细致周到", "有责任感", "支持他人", "遵守计划"]
+                },
+                "ISTP": {
+                    title: "独处充电型 · 实验报告细节控 · 小组作业逻辑怪 · 随缘佛系流",
+                    guide: "适合通过动手实践学习；实验报告数据准确、分析务实；善于解决小组技术问题；学习时间灵活，适合在工作室边做边学。",
+                    traits: ["动手能力强", "逻辑分析", "解决问题", "灵活自由"]
+                },
+                "ISTJ": {
+                    title: "独处充电型 · 实验报告细节控 · 小组作业逻辑怪 · 计划精准派",
+                    guide: "适合图书馆固定座位学习；实验报告严谨细致、无可挑剔；确保小组作业符合要求；严格遵循学习计划，推荐使用时间表管理工具。",
+                    traits: ["认真负责", "注重事实", "有条理", "遵守规则"]
+                }
+            };
+            
+            const questionContainer = document.getElementById('question-container');
+            const progressBar = document.getElementById('progress');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const resultSection = document.getElementById('result');
+            const typeResult = document.getElementById('type-result');
+            const typeTitle = document.getElementById('type-title');
+            const guideContent = document.getElementById('guide-content');
+            
+            let currentQuestion = 0;
+            let answers = {};
+            
+            // 初始化问题
+            function initQuestions() {
+                questions.forEach((question, index) => {
+                    const questionEl = document.createElement('div');
+                    questionEl.className = 'question';
+                    questionEl.innerHTML = `
+                        <div class="question-text">${index + 1}. ${question.text}</div>
+                        <div class="options">
+                            ${question.options.map(option => `
+                                <div class="option" data-value="${option.value}">${option.text}</div>
+                            `).join('')}
+                        </div>
+                    `;
+                    questionContainer.appendChild(questionEl);
+                    
+                    // 添加选项点击事件
+                    questionEl.querySelectorAll('.option').forEach(option => {
+                        option.addEventListener('click', () => {
+                            questionEl.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                            option.classList.add('selected');
+                            answers[index] = option.dataset.value;
+                            updateNavigation();
+                        });
+                    });
+                });
+                
+                showQuestion(0);
+            }
+            
+            // 显示特定问题
+            function showQuestion(index) {
+                document.querySelectorAll('.question').forEach((q, i) => {
+                    q.classList.toggle('active', i === index);
+                });
+                
+                // 更新进度条
+                progressBar.style.width = `${((index + 1) / questions.length) * 100}%`;
+                
+                // 更新导航按钮状态
+                updateNavigation();
+                
+                // 如果已回答过此题，选中之前的答案
+                if (answers[index] !== undefined) {
+                    const options = document.querySelectorAll('.question.active .option');
+                    options.forEach(option => {
+                        if (option.dataset.value === answers[index]) {
+                            option.classList.add('selected');
+                        }
+                    });
+                }
+            }
+            
+            // 更新导航按钮状态
+            function updateNavigation() {
+                prevBtn.disabled = currentQuestion === 0;
+                
+                const hasAnswer = answers[currentQuestion] !== undefined;
+                nextBtn.textContent = currentQuestion === questions.length - 1 ? '查看结果' : '下一题';
+                nextBtn.disabled = !hasAnswer;
+            }
+            
+            // 计算MBTI类型
+            function calculateType() {
+                let counts = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+                
+                // 统计每个维度的选择
+                for (let i = 0; i < questions.length; i++) {
+                    const answer = answers[i];
+                    counts[answer]++;
+                }
+                
+                // 确定类型
+                const type = 
+                    (counts.E > counts.I ? 'E' : 'I') +
+                    (counts.S > counts.N ? 'S' : 'N') +
+                    (counts.T > counts.F ? 'T' : 'F') +
+                    (counts.J > counts.P ? 'J' : 'P');
+                
+                return type;
+            }
+            
+            // 显示结果
+            function showResult() {
+                const type = calculateType();
+                const guide = typeGuides[type];
+                
+                typeResult.textContent = type;
+                typeTitle.textContent = guide.title;
+                guideContent.textContent = guide.guide;
+                
+                // 更新特质显示
+                const traitsContainer = document.querySelector('.traits');
+                traitsContainer.innerHTML = '';
+                guide.traits.forEach(trait => {
+                    const traitEl = document.createElement('div');
+                    traitEl.className = 'trait';
+                    traitEl.textContent = trait;
+                    traitsContainer.appendChild(traitEl);
+                });
+                
+                // 隐藏测试界面，显示结果界面
+                document.querySelector('.test-container').style.display = 'none';
+                resultSection.style.display = 'block';
+            }
+            
+            // 事件监听
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                }
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion(currentQuestion);
+                } else {
+                    showResult();
+                }
+            });
+            
+            restartBtn.addEventListener('click', () => {
+                currentQuestion = 0;
+                answers = {};
+                document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                showQuestion(0);
+                document.querySelector('.test-container').style.display = 'block';
+                resultSection.style.display = 'none';
+            });
+            
+            // 初始化测试
+            initQuestions();
+        });
+    </script>
+</body>
+</html>
