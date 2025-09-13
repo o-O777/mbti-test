@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>校园人格AI测试 - MBTI魔改版</title>
+    <title>校园人格AI测试 - 魔改版</title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,6 +22,30 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 背景装饰元素 */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: -1;
+            filter: blur(50px);
+        }
+        
+        body::before {
+            top: -100px;
+            left: -100px;
+        }
+        
+        body::after {
+            bottom: -100px;
+            right: -100px;
         }
         
         .container {
@@ -28,9 +53,15 @@
             max-width: 800px;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             margin: 20px;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
         }
         
         header {
@@ -38,16 +69,32 @@
             color: white;
             padding: 30px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
         }
         
         h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
+            position: relative;
+            letter-spacing: 0.5px;
         }
         
         .subtitle {
             font-size: 1.1rem;
             opacity: 0.9;
+            position: relative;
         }
         
         .intro {
@@ -55,6 +102,94 @@
             line-height: 1.6;
             background: #f8f9fa;
             border-bottom: 1px solid #eaeaea;
+            position: relative;
+        }
+        
+        .intro::first-letter {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4776E6;
+            float: left;
+            line-height: 0.8;
+            margin-right: 5px;
+        }
+        
+        .test-intro {
+            padding: 20px 25px;
+            background: #f0f4ff;
+            border-bottom: 1px solid #eaeaea;
+            line-height: 1.6;
+        }
+        
+        .test-intro h2 {
+            color: #4776E6;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .test-intro h2 i {
+            margin-right: 10px;
+        }
+        
+        .test-intro p {
+            margin-bottom: 12px;
+        }
+        
+        .dimension-legend {
+            padding: 20px 25px;
+            background: #fff;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .dimension-legend h2 {
+            color: #4776E6;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dimension-legend h2 i {
+            margin-right: 10px;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .legend-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.2s ease;
+        }
+        
+        .legend-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .legend-code {
+            font-weight: bold;
+            color: #4776E6;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            min-width: 30px;
+        }
+        
+        .legend-details h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .legend-details p {
+            font-size: 0.9rem;
+            color: #666;
         }
         
         .dimensions {
@@ -70,12 +205,30 @@
             padding: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .dimension:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
         
         .dimension h3 {
             color: #4776E6;
             margin-bottom: 10px;
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dimension h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: #4776E6;
+            margin-right: 8px;
+            border-radius: 2px;
         }
         
         .dimension p {
@@ -90,6 +243,12 @@
         .question {
             margin-bottom: 25px;
             display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .question.active {
@@ -101,6 +260,8 @@
             margin-bottom: 20px;
             font-weight: 500;
             color: #2c3e50;
+            padding-left: 10px;
+            border-left: 3px solid #4776E6;
         }
         
         .options {
@@ -116,17 +277,44 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(71, 118, 230, 0.05);
+            transition: width 0.3s ease;
+            z-index: 0;
+        }
+        
+        .option:hover::before {
+            width: 100%;
         }
         
         .option:hover {
             background: #eef4ff;
             border-color: #4776E6;
+            transform: translateX(5px);
         }
         
         .option.selected {
             background: #eef4ff;
             border-color: #4776E6;
             box-shadow: 0 0 0 2px rgba(71, 118, 230, 0.3);
+        }
+        
+        .option.selected::after {
+            content: '\f00c';
+            font-family: 'FontAwesome';
+            position: absolute;
+            right: 15px;
+            color: #4776E6;
         }
         
         .navigation {
@@ -144,17 +332,49 @@
             cursor: pointer;
             font-weight: 500;
             transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        button:hover::before {
+            transform: scaleX(1);
         }
         
         button:hover {
             background: #3b62c0;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(71, 118, 230, 0.3);
         }
         
         button:disabled {
             background: #cccccc;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
+        }
+        
+        button:disabled::before {
+            display: none;
+        }
+        
+        button i {
+            margin-right: 8px;
         }
         
         .progress-bar {
@@ -163,6 +383,7 @@
             border-radius: 4px;
             margin-bottom: 25px;
             overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         .progress {
@@ -170,13 +391,15 @@
             background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
             border-radius: 4px;
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(71, 118, 230, 0.3);
         }
         
         .result {
             display: none;
             padding: 30px;
             text-align: center;
+            animation: fadeIn 0.6s ease;
         }
         
         .type-display {
@@ -185,6 +408,19 @@
             color: #4776E6;
             margin: 20px 0;
             text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .type-display::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+            border-radius: 2px;
         }
         
         .type-title {
@@ -193,22 +429,116 @@
             margin-bottom: 20px;
         }
         
+        .representative {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0 30px;
+            display: inline-block;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            border-left: 3px solid #8E54E9;
+        }
+        
+        .representative h3 {
+            font-size: 1.1rem;
+            color: #8E54E9;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .representative h3 i {
+            margin-right: 8px;
+        }
+        
+        .representative p {
+            font-size: 1rem;
+            color: #555;
+        }
+        
         .guide {
             background: #f0f4ff;
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
             text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #4776E6;
         }
         
         .guide h3 {
             color: #4776E6;
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .guide h3 i {
+            margin-right: 10px;
+        }
+        
+        .guide-section {
+            margin-bottom: 25px;
+        }
+        
+        .guide-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .guide-section h4 {
+            color: #2c3e50;
+            margin: 15px 0 10px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .guide-section h4 i {
+            margin-right: 8px;
+            color: #4776E6;
         }
         
         .guide p {
             line-height: 1.6;
             margin-bottom: 10px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .guide p::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #4776E6;
+        }
+        
+        .tips-box {
+            background: rgba(71, 118, 230, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid rgba(71, 118, 230, 0.2);
+        }
+        
+        .tips-box h5 {
+            font-size: 1rem;
+            color: #4776E6;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tips-box h5 i {
+            margin-right: 8px;
+        }
+        
+        .tips-box p {
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .traits {
@@ -224,6 +554,14 @@
             background: #eef4ff;
             border-radius: 20px;
             font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        
+        .trait:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(71, 118, 230, 0.2);
+            border-color: #4776E6;
         }
         
         .restart {
@@ -233,10 +571,11 @@
         
         .restart:hover {
             background: #7a46c7;
+            box-shadow: 0 4px 12px rgba(142, 84, 233, 0.3);
         }
         
         @media (max-width: 600px) {
-            .dimensions {
+            .dimensions, .legend-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -247,6 +586,15 @@
             .type-display {
                 font-size: 2.5rem;
             }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -254,28 +602,97 @@
     <div class="container">
         <header>
             <h1>校园人格AI测试</h1>
-            <p class="subtitle">MBTI魔改版 · 发现你的学术人格</p>
+            <p class="subtitle">魔改版 · 发现你的学术人格</p>
         </header>
         
         <div class="intro">
-            <p>基于荣格八维理论，AI将传统MBTI维度转化为大学生熟悉的场景。回答12个问题，获取你的个性化"学术生存指南"！</p>
+            <p>基于荣格八维理论，AI将传统人格维度转化为大学生熟悉的场景。回答12个问题，获取你的个性化"学术生存指南"！</p>
+        </div>
+        
+        <div class="test-intro">
+            <h2><i class="fa fa-info-circle"></i> 测试介绍</h2>
+            <p>本测试旨在帮助大学生更好地了解自己的学习和社交风格，从而在校园生活中找到更适合自己的学习方法、社交模式和压力调节方式。</p>
+            <p>测试从四个核心维度评估你的学术人格，每个维度包含两个对立倾向，通过你的选择，最终将形成一个由四个字母组成的人格类型代码，如"QDLG"或"SFCG"等。</p>
+            <p>完成测试大约需要1分钟，请根据你的真实情况和第一反应进行选择，无需过度思考。</p>
+        </div>
+        
+        <div class="dimension-legend">
+            <h2><i class="fa fa-bookmark"></i> 维度代码解释</h2>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-code">S</div>
+                    <div class="legend-details">
+                        <h3>Social-powered (社交续航型)</h3>
+                        <p>通过与他人互动获取能量，喜欢团队合作和社交活动</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">Q</div>
+                    <div class="legend-details">
+                        <h3>Quiet-powered (独处充电型)</h3>
+                        <p>通过独处和安静环境恢复能量，偏好独立思考和学习</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">D</div>
+                    <div class="legend-details">
+                        <h3>Detail-focused (实验报告细节控)</h3>
+                        <p>注重具体细节和实际应用，擅长精确执行任务</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">F</div>
+                    <div class="legend-details">
+                        <h3>Framework-master (论文框架大师)</h3>
+                        <p>关注整体框架和抽象概念，擅长创新思考和宏观规划</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">L</div>
+                    <div class="legend-details">
+                        <h3>Logic-oriented (小组作业逻辑怪)</h3>
+                        <p>做决定时依赖逻辑分析，注重客观事实和效率</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">C</div>
+                    <div class="legend-details">
+                        <h3>Compassion-focused (宿舍情感调解员)</h3>
+                        <p>做决定时考虑他人感受，重视和谐关系和价值观</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">G</div>
+                    <div class="legend-details">
+                        <h3>Goal-scheduled (计划表精准到分钟派)</h3>
+                        <p>喜欢结构化和有计划的生活，重视时间管理和目标达成</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">H</div>
+                    <div class="legend-details">
+                        <h3>Here-and-now (佛系随缘流)</h3>
+                        <p>偏好灵活随性的生活方式，擅长即兴发挥和适应变化</p>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="dimensions">
             <div class="dimension">
-                <h3>E/I: 独处充电型 / 社交续航型</h3>
+                <h3>S/Q: 社交续航型 / 独处充电型</h3>
                 <p>你如何获取和恢复能量？通过社交还是独处？</p>
             </div>
             <div class="dimension">
-                <h3>S/N: 实验报告细节控 / 论文框架大师</h3>
+                <h3>D/F: 实验报告细节控 / 论文框架大师</h3>
                 <p>你更关注细节和现实还是整体和可能性？</p>
             </div>
             <div class="dimension">
-                <h3>T/F: 小组作业逻辑怪 / 宿舍情感调解员</h3>
+                <h3>L/C: 小组作业逻辑怪 / 宿舍情感调解员</h3>
                 <p>你做决定时更依赖逻辑分析还是价值观和谐？</p>
             </div>
             <div class="dimension">
-                <h3>J/P: 计划表精准到分钟派 / 佛系随缘流</h3>
+                <h3>G/H: 计划表精准到分钟派 / 佛系随缘流</h3>
                 <p>你更喜欢计划和组织还是灵活和随性？</p>
             </div>
         </div>
@@ -290,29 +707,67 @@
             </div>
             
             <div class="navigation">
-                <button id="prev-btn" disabled>上一题</button>
-                <button id="next-btn">下一题</button>
+                <button id="prev-btn" disabled>
+                    <i class="fa fa-arrow-left"></i> 上一题
+                </button>
+                <button id="next-btn">
+                    下一题 <i class="fa fa-arrow-right"></i>
+                </button>
             </div>
         </div>
         
         <div class="result" id="result">
             <h2>你的校园人格类型是</h2>
-            <div class="type-display" id="type-result">ENFP</div>
-            <div class="type-title" id="type-title">社交续航型 · 论文框架大师 · 宿舍情感调解员 · 佛系随缘流</div>
+            <div class="type-display" id="type-result">QDLG</div>
+            <div class="type-title" id="type-title">签到官（细节规划派）</div>
+            
+            <div class="representative" id="representative">
+                <h3><i class="fa fa-user-circle"></i> 代表人物</h3>
+                <p id="representative-name">比尔·盖茨 (QDLG)</p>
+            </div>
             
             <div class="traits">
-                <div class="trait">热情开朗</div>
-                <div class="trait">创意无限</div>
-                <div class="trait">人际高手</div>
-                <div class="trait">灵活适应</div>
+                <div class="trait">严谨务实</div>
+                <div class="trait">注重细节</div>
+                <div class="trait">责任心强</div>
+                <div class="trait">擅长规划</div>
             </div>
             
             <div class="guide">
-                <h3>📚 学术生存指南</h3>
-                <p id="guide-content">适合在咖啡厅组队学习，利用社交能量完成作业；论文写作时先搭建创意框架，再补充细节；担任小组情感协调员，但需注意 deadlines；使用灵活的时间管理工具如 Trello，警惕三分钟热度！</p>
+                <h3><i class="fa fa-book"></i> 学术生存指南</h3>
+                
+                <div class="guide-section">
+                    <h4><i class="fa fa-graduation-cap"></i> 学习场景与方法</h4>
+                    <p id="study-guide">优先选择图书馆固定座位、自习室等安静且秩序感强的环境，避免嘈杂干扰。制定每日学习计划，细化到"19:00-20:30 复习高数第三章"，完成一项划掉一项，满足成就感。</p>
+                    <p>备考时，可采用"三维复习法"：首先整理知识框架图，然后填充细节内容，最后通过模拟题检验掌握程度。这种方法符合你对结构和细节的双重追求。</p>
+                </div>
+                
+                <div class="guide-section">
+                    <h4><i class="fa fa-users"></i> 人际协作策略</h4>
+                    <p id="collaboration-guide">小组作业中主动承担"流程把控"角色，明确分工，设定阶段性目标和时间节点。在项目启动时就制定清晰的合作规则，避免后期纠纷。</p>
+                    
+                    <div class="tips-box" id="collaboration-tip">
+                        <h5><i class="fa fa-lightbulb-o"></i> QDLG专属技巧：如何拒绝小组划水成员？</h5>
+                        <p>用事实和数据说话："根据我们的分工表，你负责的部分已经延期两天了，这会影响整体进度。如果你确实有困难，我们可以重新分配任务，但需要你明确告知具体问题和需要的支持。"</p>
+                    </div>
+                </div>
+                
+                <div class="guide-section">
+                    <h4><i class="fa fa-balance-scale"></i> 压力调节方案</h4>
+                    <p id="stress-guide">若因计划被打乱而焦虑，可预留"弹性时间"（如每天30分钟），用于处理突发情况，减少失控感。每周日晚上花30分钟规划下周大致安排，给每日计划留有余地。</p>
+                    <p>当你感到压力累积时，可进行"细节放松活动"：整理书桌、按类别归档笔记或规划下周菜单，这些有秩序的小任务能帮助你恢复心理平衡。</p>
+                </div>
+                
+                <div class="guide-section">
+                    <h4><i class="fa fa-line-chart"></i> 个人成长建议</h4>
+                    <p id="growth-guide">适当培养"战略性模糊"能力，学会在非关键领域接受不完美，避免过度陷入细节而影响整体进度。每月尝试一个"无计划日"，练习在不确定性中保持从容。</p>
+                    <p>可尝试担任项目负责人，将你的规划能力与细节把控优势结合，同时学习如何在保持标准的同时灵活应对变化，这将极大提升你的领导力。</p>
+                </div>
             </div>
             
-            <button class="restart" id="restart-btn">重新测试</button>
+            <button class="restart" id="restart-btn">
+                <i class="fa fa-refresh"></i> 重新测试
+            </button>
         </div>
     </div>
 
@@ -323,170 +778,298 @@
                 {
                     text: "周末你更倾向于：",
                     options: [
-                        { text: "参加社团活动或和朋友出行", value: "E" },
-                        { text: "在图书馆或宿舍独自看书或网上冲浪", value: "I" }
+                        { text: "参加社团活动或和朋友出行", value: "S" },
+                        { text: "在图书馆或宿舍独自看书或网上冲浪", value: "Q" }
                     ]
                 },
                 {
                     text: "小组讨论中，你通常：",
                     options: [
-                        { text: "主动发言并引导话题", value: "E" },
-                        { text: "先倾听他人，再谨慎表达", value: "I" }
+                        { text: "主动发言并引导话题", value: "S" },
+                        { text: "先倾听他人，再谨慎表达", value: "Q" }
                     ]
                 },
                 {
                     text: "能量不足时，你如何恢复？",
                     options: [
-                        { text: "和朋友聊天、外出活动", value: "E" },
-                        { text: "独处休息、整理思绪", value: "I" }
+                        { text: "和朋友聊天、外出活动", value: "S" },
+                        { text: "独处休息、整理思绪", value: "Q" }
                     ]
                 },
                 {
                     text: "完成实验报告时，你更注重：",
                     options: [
-                        { text: "数据准确和步骤细节", value: "S" },
-                        { text: "结论的创新性和理论延伸", value: "N" }
+                        { text: "数据准确和步骤细节", value: "D" },
+                        { text: "结论的创新性和理论延伸", value: "F" }
                     ]
                 },
                 {
                     text: "读一篇论文时，你首先会：",
                     options: [
-                        { text: "逐句阅读，标注细节", value: "S" },
-                        { text: "先看摘要和框架，把握整体", value: "N" }
+                        { text: "逐句阅读，标注细节", value: "D" },
+                        { text: "先看摘要和框架，把握整体", value: "F" }
                     ]
                 },
                 {
                     text: "规划项目时，你更倾向于：",
                     options: [
-                        { text: "列出具体步骤和时间节点", value: "S" },
-                        { text: "构想未来可能性和宏观意义", value: "N" }
+                        { text: "列出具体步骤和时间节点", value: "D" },
+                        { text: "构想未来可能性和宏观意义", value: "F" }
                     ]
                 },
                 {
                     text: "小组作业出现分歧时，你优先：",
                     options: [
-                        { text: "分析利弊，选择最优方案", value: "T" },
-                        { text: "照顾成员情绪，寻求共识", value: "F" }
+                        { text: "分析利弊，选择最优方案", value: "L" },
+                        { text: "照顾成员情绪，寻求共识", value: "C" }
                     ]
                 },
                 {
                     text: "朋友向你倾诉烦恼，你会：",
                     options: [
-                        { text: "理性分析问题根源", value: "T" },
-                        { text: "共情安慰，提供情感支持", value: "F" }
+                        { text: "理性分析问题根源", value: "L" },
+                        { text: "共情安慰，提供情感支持", value: "C" }
                     ]
                 },
                 {
                     text: "评价一件事时，你更依赖：",
                     options: [
-                        { text: "客观标准和逻辑一致性", value: "T" },
-                        { text: "个人价值观和他人感受", value: "F" }
+                        { text: "客观标准和逻辑一致性", value: "L" },
+                        { text: "个人价值观和他人感受", value: "C" }
                     ]
                 },
                 {
                     text: "你的每日计划通常是：",
                     options: [
-                        { text: "详细规划，严格执行", value: "J" },
-                        { text: "灵活安排，随心情调整", value: "P" }
+                        { text: "详细规划，严格执行", value: "G" },
+                        { text: "灵活安排，随心情调整", value: "H" }
                     ]
                 },
                 {
                     text: "面对DDL，你通常：",
                     options: [
-                        { text: "提前完成，留出缓冲时间", value: "J" },
-                        { text: "临时冲刺，效率爆棚", value: "P" }
+                        { text: "提前完成，留出缓冲时间", value: "G" },
+                        { text: "临时冲刺，效率爆棚", value: "H" }
                     ]
                 },
                 {
                     text: "选择选修课时，你更关注：",
                     options: [
-                        { text: "课程结构的明确性和考核方式", value: "J" },
-                        { text: "课程内容的趣味性和自由度", value: "P" }
+                        { text: "课程结构的明确性和考核方式", value: "G" },
+                        { text: "课程内容的趣味性和自由度", value: "H" }
                     ]
                 }
             ];
             
-            // 类型解释和指南
+            // 类型解释和指南（扩充版）
             const typeGuides = {
-                "ENFP": {
-                    title: "社交续航型 · 论文框架大师 · 宿舍情感调解员 · 随缘佛系流",
-                    guide: "适合在咖啡厅组队学习，利用社交能量完成作业；论文写作时先搭建创意框架，再补充细节；担任小组情感协调员，但需注意 deadlines；使用灵活的时间管理工具如 Trello，警惕三分钟热度！",
-                    traits: ["热情开朗", "创意无限", "人际高手", "灵活适应"]
+                "QDLG": {
+                    title: "签到官（细节规划派）",
+                    representative: "比尔·盖茨 (QDLG)",
+                    traits: ["严谨务实", "注重细节", "责任心强", "擅长规划"],
+                    studyGuide: "优先选择图书馆固定座位、自习室等安静且秩序感强的环境，避免嘈杂干扰。制定每日学习计划，细化到\"19:00-20:30 复习高数第三章\"，完成一项划掉一项，满足成就感。",
+                    collaborationGuide: "小组作业中主动承担\"流程把控\"角色，明确分工，设定阶段性目标和时间节点。在项目启动时就制定清晰的合作规则，避免后期纠纷。",
+                    collaborationTip: {
+                        title: "QDLG专属技巧：如何拒绝小组划水成员？",
+                        content: "用事实和数据说话：\"根据我们的分工表，你负责的部分已经延期两天了，这会影响整体进度。如果你确实有困难，我们可以重新分配任务，但需要你明确告知具体问题和需要的支持。\""
+                    },
+                    stressGuide: "若因计划被打乱而焦虑，可预留\"弹性时间\"（如每天30分钟），用于处理突发情况，减少失控感。每周日晚上花30分钟规划下周大致安排，给每日计划留有余地。",
+                    growthGuide: "适当培养\"战略性模糊\"能力，学会在非关键领域接受不完美，避免过度陷入细节而影响整体进度。每月尝试一个\"无计划日\"，练习在不确定性中保持从容。"
                 },
-                "ENFJ": {
-                    title: "社交续航型 · 论文框架大师 · 宿舍情感调解员 · 计划精准派",
-                    guide: "适合组织学习小组，善于激励他人；论文注重整体逻辑和人文关怀；天然的情感支持者；喜欢有计划的学习节奏，推荐使用Google日历管理日程。",
-                    traits: ["善于沟通", "有领导力", "关心他人", "有条理"]
+                "QDCG": {
+                    title: "守护者（暖心规划派）",
+                    representative: "特蕾莎修女 (QDCG)",
+                    traits: ["温柔体贴", "善于观察", "重视他人需求", "做事细致"],
+                    studyGuide: "适合在有熟悉伙伴的自习区域（如宿舍小书桌、好友结伴的图书馆角落），轻微的同伴陪伴能带来安全感。整理笔记时会标注\"易错点\"\"重点例题\"，还会主动分享给同学。",
+                    collaborationGuide: "小组作业中主动关注成员情绪，若有人因任务难emo，会轻声安慰并兼顾情感与效率。善于发现每个成员的优势并合理分配任务，提升团队凝聚力。",
+                    collaborationTip: {
+                        title: "QDCG专属技巧：如何应对小组意见不合？",
+                        content: "先认可各方观点的合理性：\"我理解A同学想注重细节，B同学想加快进度，这两种想法都有道理。或许我们可以先确定核心目标，再讨论如何在保证质量的前提下提高效率？\""
+                    },
+                    stressGuide: "避免因过度帮他人解决问题耽误自己学习，可设定\"帮助时间上限\"。当感到疲惫时，可进行\"小确幸\"活动：泡一杯喜欢的茶，整理书桌，或看几页轻松的散文。",
+                    growthGuide: "培养\"适度拒绝\"的能力，学会在帮助他人与照顾自己之间找到平衡。可尝试担任班级或社团的\"关怀委员\"，将你的同理心与组织能力结合起来发挥更大作用。"
                 },
-                "ENTP": {
-                    title: "社交续航型 · 论文框架大师 · 小组作业逻辑怪 · 随缘佛系流",
-                    guide: "适合辩论式学习，通过讨论深化理解；论文创意丰富但需注意细节；擅长分析小组作业的逻辑结构；时间管理随性，适合使用思维导图工具。",
-                    traits: ["头脑灵活", "善于辩论", "创新思维", "自由随性"]
+                "QFCG": {
+                    title: "引路人（洞察引导派）",
+                    representative: "居里夫人 (QFCG)",
+                    traits: ["深邃内敛", "富有洞察力", "追求意义感", "善于共情"],
+                    studyGuide: "偏爱安静且有\"氛围感\"的地方，如图书馆靠窗座位、校园咖啡馆角落，能在独处中激发深度思考。先搭建\"逻辑框架图\"，明确脉络再填充内容，形成自己的知识体系。",
+                    collaborationGuide: "小组作业中能精准捕捉成员的隐性需求，主动引导沉默成员表达想法，兼顾实用性与深度。善于将抽象概念转化为具体行动方案，帮助团队达成共识。",
+                    collaborationTip: {
+                        title: "QFCG专属技巧：如何激发团队创意？",
+                        content: "设计引导性问题：\"如果我们不受时间和资源限制，这个项目最理想的形态是什么？从这个理想状态出发，我们现在可以做些什么？\" 帮助团队突破思维局限。"
+                    },
+                    stressGuide: "若因思考过多感到疲惫，可通过写日记梳理思绪或在校园里散步观察自然。定期进行\"思维断舍离\"，将担忧和想法写在纸上，给自己的大脑\"减负\"。",
+                    growthGuide: "练习将抽象想法转化为可执行的计划，避免陷入\"思想的巨人，行动的矮子\"困境。可尝试参与科研项目，将你的洞察力与对意义的追求结合到学术探索中。"
                 },
-                "ENTJ": {
-                    title: "社交续航型 · 论文框架大师 · 小组作业逻辑怪 · 计划精准派",
-                    guide: "适合担任项目组长，善于统筹规划；论文结构严谨、立意高远；决策果断，注重效率；严格的时间管理者，推荐使用Notion全面规划学习生活。",
-                    traits: ["战略思维", "果断坚决", "善于规划", "高效务实"]
+                "QFLG": {
+                    title: "规划王（战略规划派）",
+                    representative: "爱因斯坦 (QFLG)",
+                    traits: ["冷静理智", "目标导向", "擅长战略规划", "逻辑缜密"],
+                    studyGuide: "必须是绝对安静、无干扰的环境，如图书馆闭馆自习室、实验室空房间，能专注投入深度思考。备考时先分析\"考试大纲\"，找出高频考点和难点，针对性分配复习时间。",
+                    collaborationGuide: "小组作业中直接提出\"核心目标\"和\"最优方案\"，对低效讨论零容忍，用计划表严格把控每个环节。善于发现逻辑漏洞并提出改进建议，提升团队成果质量。",
+                    collaborationTip: {
+                        title: "QFLG专属技巧：如何处理低效会议？",
+                        content: "提前发送议程和预期成果：\"本次会议我们只讨论三个问题，目标是确定最终方案。每个问题限时15分钟，我会负责计时和总结。请大家提前准备相关想法。\""
+                    },
+                    stressGuide: "若因追求完美导致焦虑，可告诉自己\"完成比完美更重要\"，避免陷入内耗。通过解决逻辑谜题、玩策略游戏等方式放松大脑，同时保持思维活跃度。",
+                    growthGuide: "培养对他人情感的敏感度，避免因过度强调逻辑而忽视团队氛围。可尝试指导低年级学生，在传授知识的同时学习如何更好地理解和沟通不同思维方式的人。"
                 },
-                "ESFP": {
-                    title: "社交续航型 · 实验报告细节控 · 宿舍情感调解员 · 随缘佛系流",
-                    guide: "适合通过实践活动学习；实验报告细节丰富、数据准确；小组中的气氛担当；学习计划灵活，适合短期冲刺型学习方式。",
-                    traits: ["活泼有趣", "注重现实", "人际和谐", "灵活应变"]
+                "QDLH": {
+                    title: "工匠师（实干应变派）",
+                    representative: "史蒂夫·沃兹尼亚克 (QDLH)",
+                    traits: ["冷静务实", "动手能力强", "灵活应变", "做事高效"],
+                    studyGuide: "不固定学习地点，实验室、图书馆走廊、甚至校园长椅都可以，只要能专注做事，环境不影响状态。实验课上能快速掌握操作技巧，遇到设备故障时，会主动拆解排查。",
+                    collaborationGuide: "小组作业中不主动牵头，但分配到任务后会默默高效完成，不纠结流程，只要结果达标即可。面对突发问题时能快速提出解决方案，是团队中的\"救火队员\"。",
+                    collaborationTip: {
+                        title: "QDLH专属技巧：如何应对临时变更的任务？",
+                        content: "迅速评估影响并调整方案：\"既然需求变了，我们可以这样调整步骤...这样既能满足新要求，又能最大限度利用已完成的工作。我今天可以加班完成修改部分。\""
+                    },
+                    stressGuide: "若因任务突发变化烦躁，可先暂停转移注意力10分钟（如做几个拉伸动作、听一首快节奏音乐），再重新思考解决方案。通过动手活动（如组装模型、修理物品）释放压力。",
+                    growthGuide: "培养长期规划能力，避免只关注眼前任务而忽视整体目标。可尝试参与科技创新比赛，将你的动手能力与应变能力结合，创造实用的解决方案。"
                 },
-                "ESFJ": {
-                    title: "社交续航型 · 实验报告细节控 · 宿舍情感调解员 · 计划精准派",
-                    guide: "适合小组学习，乐于帮助他人；实验报告步骤清晰、格式规范；注重小组和谐与协作；喜欢有计划的学习节奏，推荐使用番茄钟工作法。",
-                    traits: ["乐于助人", "注重细节", "有责任心", "计划性强"]
+                "QDCH": {
+                    title: "艺术家（细腻感知派）",
+                    representative: "宫崎骏 (QDCH)",
+                    traits: ["温柔细腻", "热爱生活", "注重感官体验", "感知力强"],
+                    studyGuide: "喜欢温馨、舒适的环境，如宿舍铺着软垫子的书桌、有绿植的自习角，环境的\"治愈感\"能提升学习状态。整理笔记时会用不同颜色的笔标注，还会画小插图，让笔记既美观又好记。",
+                    collaborationGuide: "小组作业中会主动营造轻松氛围，带小零食分享，巧妙化解意见不合。善于发现项目中的\"情感连接点\"，让团队合作更有温度和意义。",
+                    collaborationTip: {
+                        title: "QDCH专属技巧：如何缓解团队紧张气氛？",
+                        content: "用轻松的方式转移注意力：\"大家最近都辛苦了，我带了些小点心，我们先休息5分钟尝尝？其实刚才的问题换个角度想...\" 用温和方式重新引导讨论。"
+                    },
+                    stressGuide: "累了就做\"感官放松\"：泡一杯香茶、闻闻精油、触摸柔软的织物，从生活小美好中恢复能量。保持写日记的习惯，记录每天的小确幸和感受，释放情绪压力。",
+                    growthGuide: "学习设定明确目标和时间管理技巧，避免因追求完美细节而导致拖延。可尝试将艺术元素融入学术项目，如为实验数据设计更直观美观的可视化呈现方式。"
                 },
-                "ESTP": {
-                    title: "社交续航型 · 实验报告细节控 · 小组作业逻辑怪 · 随缘佛系流",
-                    guide: "适合通过实践和案例学习；实验报告数据翔实、结论务实；善于解决小组中的实际问题；学习方式灵活，适合在运动场边学习边社交。",
-                    traits: ["行动力强", "现实导向", "解决问题", "随机应变"]
+                "QFCH": {
+                    title: "治愈者（共情理想派）",
+                    representative: "南丁格尔 (QFCH)",
+                    traits: ["理想主义", "情感丰富", "善于深度思考", "注重精神共鸣"],
+                    studyGuide: "需要安静且能\"独处思考\"的环境，如图书馆角落的单人座、校园里没人的小树林，能在无干扰中沉浸到知识里。写论文时会选择自己真正感兴趣的话题，即使资料难查也愿意深入研究。",
+                    collaborationGuide: "小组作业中能理解每个人的\"动机和需求\"，协调出兼顾双方的方案，用分享感受的方式沟通。善于将团队目标与个人价值感连接，激发成员的内在动力。",
+                    collaborationTip: {
+                        title: "QFCH专属技巧：如何处理团队中的价值观冲突？",
+                        content: "创造安全表达空间：\"我注意到我们对这个问题有不同看法，这很正常。不如我们先分享一下各自观点背后的想法和顾虑，或许能找到共同的价值基础？\""
+                    },
+                    stressGuide: "若因\"理想与现实差距\"焦虑，可写\"情绪日记\"或读一首喜欢的诗。定期与志同道合的朋友深度交流，从精神共鸣中获取力量，避免孤独感。",
+                    growthGuide: "培养将理想转化为现实步骤的能力，学习项目管理的基本知识，让美好的想法能够落地实现。可尝试参与公益类学术项目，将你的理想主义与社会价值结合起来。"
                 },
-                "ESTJ": {
-                    title: "社交续航型 · 实验报告细节控 · 小组作业逻辑怪 · 计划精准派",
-                    guide: "适合结构化学习环境；实验报告严谨规范、数据准确；善于组织小组作业流程；严格遵循学习计划，推荐使用时间块管理法。",
-                    traits: ["务实高效", "有条理", "重视规则", "执行力强"]
+                "QFLH": {
+                    title: "逻辑怪（逻辑思辨派）",
+                    representative: "霍金 (QFLH)",
+                    traits: ["好奇思辨", "逻辑缜密", "喜欢探索本质", "善于拆解问题"],
+                    studyGuide: "只要能\"不受打扰思考\"即可，不管是图书馆、宿舍还是校园石凳，甚至边走路边想问题都能进入状态。擅长\"跨学科联想\"，遇到难题先\"拆解问题\"，找出核心矛盾，再逐一突破。",
+                    collaborationGuide: "小组作业中不关注\"流程和情绪\"，只在意\"逻辑是否通顺\"，直接指出方案漏洞。在团队陷入思维定式时，能提出颠覆性想法，推动创新。",
+                    collaborationTip: {
+                        title: "QFLH专属技巧：如何提出批评又不伤害关系？",
+                        content: "聚焦问题而非个人：\"从逻辑上看，这个方案在X环节可能存在漏洞，因为...如果我们换一种思路，也许能避免这个问题。你觉得呢？\" 用建设性方式提出不同意见。"
+                    },
+                    stressGuide: "若因\"过度思考\"感到疲惫，可玩会儿逻辑游戏让大脑换个\"频道\"。进行\"身体放空\"活动，如长距离散步或游泳，让身体运动带动思维休息。",
+                    growthGuide: "练习简明扼要地表达复杂想法，避免因过度阐述细节而失去听众。可尝试参加辩论赛或学术沙龙，在与不同思维方式的人交锋中完善自己的思考。"
                 },
-                "INFP": {
-                    title: "独处充电型 · 论文框架大师 · 宿舍情感调解员 · 随缘佛系流",
-                    guide: "适合在安静角落独自学习；论文写作富有创意和深度；默默关心同伴情感需求；学习计划灵活，适合在灵感迸发时高效工作。",
-                    traits: ["理想主义", "深度思考", "善解人意", "灵活自由"]
+                "SDLH": {
+                    title: "动手派（行动社交派）",
+                    representative: "雷军 (SDLH)",
+                    traits: ["活泼外向", "行动力强", "擅长把握当下", "充满活力"],
+                    studyGuide: "不喜欢独处学习，更愿意在\"有人互动\"的环境中，如和朋友一起的自习室、能讨论问题的实验室，边学边聊效率更高。实验课上最积极，动手操作比听理论课学得快。",
+                    collaborationGuide: "小组作业中主动牵头，擅长调动氛围，遇到问题不纠结，直接行动试错。能快速将想法转化为行动，推动团队前进，是天生的行动派。",
+                    collaborationTip: {
+                        title: "SDLH专属技巧：如何平衡行动力与思考深度？",
+                        content: "采用\"快速原型+迭代\"模式：\"我们先花1小时做一个简易版本，测试后再改进，这样既能快速推进，又能在实践中发现问题。大家觉得这个方向可行吗？\""
+                    },
+                    stressGuide: "若因任务紧张感到焦虑，可约朋友打场球、逛会儿街释放压力。通过社交互动和身体运动双重方式恢复能量，避免独自纠结。",
+                    growthGuide: "培养\"事前思考\"的习惯，避免因冲动行动导致返工。可尝试组织校园活动或小型创业项目，将你的行动力和社交能力转化为实际成果。"
                 },
-                "INFJ": {
-                    title: "独处充电型 · 论文框架大师 · 宿舍情感调解员 · 计划精准派",
-                    guide: "适合在安静图书馆深度工作；论文结构严谨且富有洞察力；善于洞察他人情感需求；有计划的学习者，推荐使用子弹笔记法。",
-                    traits: ["深度洞察", "富有创意", "关心他人", "有计划性"]
+                "SDCH": {
+                    title: "审美家（活力体验派）",
+                    representative: "奥普拉·温弗瑞 (SDCH)",
+                    traits: ["热情开朗", "热爱生活", "擅长感知情绪", "注重体验感"],
+                    studyGuide: "必须在\"有伙伴陪伴\"的环境中，如宿舍集体自习、和朋友一起的咖啡馆，有人一起学习会更有动力。复习时喜欢\"边玩边学\"，用卡片记单词、把知识点编成小口诀。",
+                    collaborationGuide: "小组作业中是\"氛围担当\"，主动关心每个人的状态，擅长化解矛盾。能让团队在轻松愉快的氛围中高效合作，提升整体幸福感。",
+                    collaborationTip: {
+                        title: "SDCH专属技巧：三分钟热度拯救术",
+                        content: "将大任务分解为有趣的小挑战：\"我们来玩个游戏吧，每人20分钟内完成自己负责的部分，完成后可以获得小奖励。这样既有趣又能提高效率，怎么样？\""
+                    },
+                    stressGuide: "累了就约朋友去唱K、看演唱会，在热闹的氛围中释放压力。创造\"快乐学习仪式\"，如学习前和朋友一起泡咖啡、分享趣事，让学习成为愉快体验。",
+                    growthGuide: "培养专注力和坚持性，学习设定小目标并完成它。可尝试将社交能力与创意结合，如组织主题学习小组或知识分享会，让学习变得更有趣。"
                 },
-                "INTP": {
-                    title: "独处充电型 · 论文框架大师 · 小组作业逻辑怪 · 随缘佛系流",
-                    guide: "适合独自研究复杂问题；论文理论框架创新性强；擅长分析小组作业的逻辑结构；学习时间随意，适合使用知识管理工具如Obsidian。",
-                    traits: ["逻辑性强", "抽象思维", "独立思考", "灵活自由"]
+                "SFCH": {
+                    title: "氛围组（创意氛围派）",
+                    representative: "理查德·布兰森 (SFCH)",
+                    traits: ["热情洋溢", "充满创意", "善于激发他人", "好奇心强"],
+                    studyGuide: "喜欢在\"能交流想法\"的环境中，如图书馆讨论区、宿舍卧谈会，和人聊学习话题能激发灵感。写论文时能快速想出\"新颖的选题\"，阅读文献时会关注\"有趣的观点\"。",
+                    collaborationGuide: "小组作业中主动提出\"创意方案\"，能调动每个人的积极性，不纠结细节，先把创意落地再说。善于创造开放包容的氛围，让每个成员都敢表达想法。",
+                    collaborationTip: {
+                        title: "SFCH专属技巧：如何保持团队创意活力？",
+                        content: "定期组织\"创意狂欢\"：\"今天我们不讨论具体方案，每人分享一个最疯狂的想法，不管可行性如何。也许能从中找到意想不到的灵感！\""
+                    },
+                    stressGuide: "若因\"三分钟热度\"导致任务拖延，可找\"同伴监督\"或用\"奖励机制\"保持动力。通过接触新环境、认识新朋友来获取新鲜感和能量。",
+                    growthGuide: "学习项目管理基础知识，将创意与执行力结合，避免想法流于表面。可尝试参与创新创业比赛，在实践中学习如何将创意转化为可持续的方案。"
                 },
-                "INTJ": {
-                    title: "独处充电型 · 论文框架大师 · 小组作业逻辑怪 · 计划精准派",
-                    guide: "适合独立研究和战略规划；论文宏观框架清晰、创新性强；善于优化小组作业效率；严格规划学习进程，推荐使用甘特图管理项目。",
-                    traits: ["战略思维", "独立自主", "注重效率", "计划性强"]
+                "SFLH": {
+                    title: "点子王（创意策略派）",
+                    representative: "埃隆·马斯克 (SFLH)",
+                    traits: ["机智善辩", "喜欢挑战", "擅长逻辑推理", "辩论担当"],
+                    studyGuide: "喜欢在\"有思想碰撞\"的环境中，如课堂讨论、学术辩论会，和人争论学习话题能激发思维。擅长\"批判性思考\"，读文献时会质疑\"作者的观点是否严谨\"。",
+                    collaborationGuide: "小组作业中主动发起\"头脑风暴\"，鼓励大家提出不同观点，不做固定计划，根据讨论结果灵活调整。能在激烈讨论中找到最优方案，推动团队进步。",
+                    collaborationTip: {
+                        title: "SFLH专属技巧：如何引导有效辩论？",
+                        content: "设定辩论规则：\"我们每人有3分钟陈述观点，必须基于事实和逻辑。结束后我们总结各方优点，整合出最佳方案。记住，我们辩论的是观点，不是针对人。\""
+                    },
+                    stressGuide: "若因\"过度辩论\"感到疲惫，可玩会儿策略类游戏或看一场辩论赛视频。通过有竞争性的活动释放能量，同时保持思维活跃。",
+                    growthGuide: "培养倾听能力，学会欣赏不同视角的价值，避免陷入\"为辩论而辩论\"的误区。可尝试参与模拟联合国或学术辩论比赛，锻炼在压力下清晰表达的能力。"
                 },
-                "ISFP": {
-                    title: "独处充电型 · 实验报告细节控 · 宿舍情感调解员 · 随缘佛系流",
-                    guide: "适合在舒适安静环境学习；实验报告观察细致、描述准确；默默关心同伴感受；学习方式随性，适合在艺术氛围中工作。",
-                    traits: ["审美敏锐", "注重细节", "体贴他人", "灵活随性"]
+                "SDLG": {
+                    title: "班长型（高效管理派）",
+                    representative: "马云 (SDLG)",
+                    traits: ["果断干练", "注重效率", "擅长组织管理", "团队领导者"],
+                    studyGuide: "喜欢在\"有规律、能互动\"的环境中，如固定的小组自习室、有明确流程的实验室，既有人一起学习，又不混乱。制定\"精确到分钟\"的学习计划，严格执行。",
+                    collaborationGuide: "小组作业中直接分配任务、设定deadlines，对拖延的成员会严肃提醒。善于协调资源，确保团队高效运作，按时高质量完成任务。",
+                    collaborationTip: {
+                        title: "SDLG专属技巧：如何提升团队执行力？",
+                        content: "实施\"目标-任务-时间-责任人\"四要素管理法：\"我们的目标是周四前完成初稿，分解为三个任务，分别由A、B、C负责，周二中午前完成各自部分，我会跟进进度。\""
+                    },
+                    stressGuide: "若因\"过度掌控\"感到疲惫，可适当放权，之余去跑步、健身释放压力。建立\"成就清单\"，记录每天完成的任务，从中获取成就感和动力。",
+                    growthGuide: "学习灵活应变，接受计划赶不上变化的现实，培养在不确定性中保持高效的能力。可尝试竞选学生干部，在实际工作中提升领导力和组织能力。"
                 },
-                "ISFJ": {
-                    title: "独处充电型 · 实验报告细节控 · 宿舍情感调解员 · 计划精准派",
-                    guide: "适合在图书馆安静学习；实验报告细节完美、格式规范；默默支持小组成员；学习计划严谨，推荐使用打卡式学习法。",
-                    traits: ["细致周到", "有责任感", "支持他人", "遵守计划"]
+                "SDCG": {
+                    title: "联谊官（和谐统筹派）",
+                    representative: "梅琳达·盖茨 (SDCG)",
+                    traits: ["友善热情", "善于照顾他人", "重视集体和谐", "团队粘合剂"],
+                    studyGuide: "喜欢在\"有伙伴、氛围温暖\"的环境中，如和室友一起的宿舍自习、有熟悉同学的图书馆区域，大家互相鼓励。制定计划时会\"兼顾他人\"，和室友约定共同学习时间。",
+                    collaborationGuide: "小组作业中先询问每个人的\"擅长领域\"，让每个人发挥优势，兼顾情感与进度。善于发现并化解潜在矛盾，是团队的\"粘合剂\"和\"润滑剂\"。",
+                    collaborationTip: {
+                        title: "SDCG专属技巧：如何处理团队中的小团体现象？",
+                        content: "创造共同目标和交叉合作：\"接下来我们换一种分组方式，每人负责一部分并与不同的人合作，这样大家都有机会互相了解。我相信多样化合作能带来更好的结果。\""
+                    },
+                    stressGuide: "累了就和朋友一起做饭、看综艺，在温馨的社交中放松。避免过度关注他人需求而忽视自己，每周留一些\"自我关爱时间\"，做自己喜欢的事。",
+                    growthGuide: "培养决策能力，学会在追求和谐的同时不失主见，避免因过度迁就他人而影响效率。可尝试组织志愿服务活动，将你的协调能力与社会关怀结合起来。"
                 },
-                "ISTP": {
-                    title: "独处充电型 · 实验报告细节控 · 小组作业逻辑怪 · 随缘佛系流",
-                    guide: "适合通过动手实践学习；实验报告数据准确、分析务实；善于解决小组技术问题；学习时间灵活，适合在工作室边做边学。",
-                    traits: ["动手能力强", "逻辑分析", "解决问题", "灵活自由"]
+                "SFCG": {
+                    title: "动员家（引领赋能派）",
+                    representative: "曼德拉 (SFCG)",
+                    traits: ["温暖睿智", "善于引导", "有感染力", "善于激发潜力"],
+                    studyGuide: "喜欢在\"能带动他人\"的环境中，如组织学习小组、担任课代表牵头复习，在帮助他人的过程中提升自己。写论文前会组织\"选题讨论会\"，和同学一起头脑风暴。",
+                    collaborationGuide: "小组作业中先描绘\"最终愿景\"，激发大家的动力，帮助每个人找到定位。善于发现成员潜力并给予鼓励，让团队成员在合作中获得成长。",
+                    collaborationTip: {
+                        title: "SFCG专属技巧：如何激发团队潜力？",
+                        content: "采用赋能式提问：\"我知道你在这方面很有想法，如果由你来负责这部分，你会怎么做？需要什么支持？我相信你能做得很好。\" 给予信任和空间激发潜能。"
+                    },
+                    stressGuide: "若因\"承担过多\"感到疲惫，可找朋友倾诉或做公益，学会适当\"拒绝\"。通过帮助他人获得成就感的同时，也要设定边界，避免过度消耗自己。",
+                    growthGuide: "学习设定优先级，避免因想满足所有人需求而分散精力。可尝试参与社会创新项目，将你的动员能力与理想主义结合，推动积极变革。"
                 },
-                "ISTJ": {
-                    title: "独处充电型 · 实验报告细节控 · 小组作业逻辑怪 · 计划精准派",
-                    guide: "适合图书馆固定座位学习；实验报告严谨细致、无可挑剔；确保小组作业符合要求；严格遵循学习计划，推荐使用时间表管理工具。",
-                    traits: ["认真负责", "注重事实", "有条理", "遵守规则"]
+                "SFLG": {
+                    title: "组局者（战略领航派）",
+                    representative: "乔布斯 (SFLG)",
+                    traits: ["自信果断", "目标导向", "擅长战略布局", "天生领导者"],
+                    studyGuide: "喜欢在\"能高效沟通、推动任务\"的环境中，如小组讨论室、项目会议室，交流必围绕\"学习目标\"。备考时先分析\"历年真题\"，找出考试重点和命题规律。",
+                    collaborationGuide: "小组作业中直接明确\"核心目标\"和\"资源分配\"，对低效讨论直接打断，严格按计划执行。善于将不同人才整合起来，为共同目标努力。",
+                    collaborationTip: {
+                        title: "SFLG专属技巧：如何处理团队中的反对意见？",
+                        content: "直接面对并理性分析：\"我理解你有不同看法，能具体说明你的担忧和建议吗？我们评估一下两种方案的优缺点，基于数据和逻辑做出决定，而不是凭感觉。\""
+                    },
+                    stressGuide: "若因\"目标未达成\"焦虑，可复盘调整计划，用\"解决问题\"缓解焦虑。定期进行高强度运动（如跑步、拳击）释放压力，保持状态。",
+                    growthGuide: "培养同理心和倾听能力，理解不同类型成员的需求和工作方式，成为更有人情味的领导者。可尝试发起创业项目或大型校园活动，锻炼战略思维和执行能力。"
                 }
             };
             
@@ -498,13 +1081,20 @@
             const resultSection = document.getElementById('result');
             const typeResult = document.getElementById('type-result');
             const typeTitle = document.getElementById('type-title');
-            const guideContent = document.getElementById('guide-content');
+            const representativeName = document.getElementById('representative-name');
+            const studyGuide = document.getElementById('study-guide');
+            const collaborationGuide = document.getElementById('collaboration-guide');
+            const collaborationTip = document.getElementById('collaboration-tip');
+            const stressGuide = document.getElementById('stress-guide');
+            const growthGuide = document.getElementById('growth-guide');
             
             let currentQuestion = 0;
             let answers = {};
             
             // 初始化问题
             function initQuestions() {
+                questionContainer.innerHTML = ''; // 清空容器
+                
                 questions.forEach((question, index) => {
                     const questionEl = document.createElement('div');
                     questionEl.className = 'question';
@@ -524,6 +1114,13 @@
                             questionEl.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
                             option.classList.add('selected');
                             answers[index] = option.dataset.value;
+                            
+                            // 添加选择动画
+                            option.classList.add('selected-animation');
+                            setTimeout(() => {
+                                option.classList.remove('selected-animation');
+                            }, 300);
+                            
                             updateNavigation();
                         });
                     });
@@ -560,13 +1157,15 @@
                 prevBtn.disabled = currentQuestion === 0;
                 
                 const hasAnswer = answers[currentQuestion] !== undefined;
-                nextBtn.textContent = currentQuestion === questions.length - 1 ? '查看结果' : '下一题';
+                nextBtn.innerHTML = currentQuestion === questions.length - 1 
+                    ? '<i class="fa fa-check"></i> 查看结果' 
+                    : '下一题 <i class="fa fa-arrow-right"></i>';
                 nextBtn.disabled = !hasAnswer;
             }
             
-            // 计算MBTI类型
+            // 计算人格类型
             function calculateType() {
-                let counts = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+                let counts = { S: 0, Q: 0, D: 0, F: 0, L: 0, C: 0, G: 0, H: 0 };
                 
                 // 统计每个维度的选择
                 for (let i = 0; i < questions.length; i++) {
@@ -576,10 +1175,10 @@
                 
                 // 确定类型
                 const type = 
-                    (counts.E > counts.I ? 'E' : 'I') +
-                    (counts.S > counts.N ? 'S' : 'N') +
-                    (counts.T > counts.F ? 'T' : 'F') +
-                    (counts.J > counts.P ? 'J' : 'P');
+                    (counts.S > counts.Q ? 'S' : 'Q') +
+                    (counts.D > counts.F ? 'D' : 'F') +
+                    (counts.L > counts.C ? 'L' : 'C') +
+                    (counts.G > counts.H ? 'G' : 'H');
                 
                 return type;
             }
@@ -591,7 +1190,17 @@
                 
                 typeResult.textContent = type;
                 typeTitle.textContent = guide.title;
-                guideContent.textContent = guide.guide;
+                representativeName.textContent = guide.representative;
+                
+                // 更新指南内容
+                studyGuide.textContent = guide.studyGuide;
+                collaborationGuide.textContent = guide.collaborationGuide;
+                collaborationTip.innerHTML = `
+                    <h5><i class="fa fa-lightbulb-o"></i> ${guide.collaborationTip.title}</h5>
+                    <p>${guide.collaborationTip.content}</p>
+                `;
+                stressGuide.textContent = guide.stressGuide;
+                growthGuide.textContent = guide.growthGuide;
                 
                 // 更新特质显示
                 const traitsContainer = document.querySelector('.traits');
@@ -601,11 +1210,22 @@
                     traitEl.className = 'trait';
                     traitEl.textContent = trait;
                     traitsContainer.appendChild(traitEl);
+                    
+                    // 添加特质动画
+                    setTimeout(() => {
+                        traitEl.style.opacity = '1';
+                        traitEl.style.transform = 'translateY(0)';
+                    }, 100 * traitsContainer.children.length);
                 });
                 
                 // 隐藏测试界面，显示结果界面
                 document.querySelector('.test-container').style.display = 'none';
                 resultSection.style.display = 'block';
+                
+                // 为结果添加渐入动画
+                setTimeout(() => {
+                    resultSection.style.opacity = '1';
+                }, 100);
             }
             
             // 事件监听
@@ -632,6 +1252,13 @@
                 showQuestion(0);
                 document.querySelector('.test-container').style.display = 'block';
                 resultSection.style.display = 'none';
+                
+                // 添加重启动画
+                const container = document.querySelector('.container');
+                container.classList.add('restart-animation');
+                setTimeout(() => {
+                    container.classList.remove('restart-animation');
+                }, 500);
             });
             
             // 初始化测试
