@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.loli.net">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- 使用国内镜像加速Google Fonts -->
-    <link href="https://fonts.loli.net/css2?family=Orbitron:wght@700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=Orbitron:wght@700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg-color: #0a0e1a;
@@ -37,11 +39,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             position: relative;
             overflow-x: hidden;
         }
-        
+
         /* --- Preloader Animation --- */
         #preloader {
             position: fixed;
@@ -58,12 +60,14 @@
             color: var(--primary-color);
             font-family: 'Orbitron', sans-serif;
         }
+
         .loader-text {
             margin-bottom: 20px;
             font-size: 1.5rem;
             letter-spacing: 3px;
             text-shadow: 0 0 10px var(--glow-color);
         }
+
         .loader-bar {
             width: 250px;
             height: 10px;
@@ -71,6 +75,7 @@
             border-radius: 5px;
             overflow: hidden;
         }
+
         .loader-progress {
             width: 0;
             height: 100%;
@@ -78,8 +83,11 @@
             /* 动画时间从2.5秒缩短到1.5秒 */
             animation: loading 1.5s ease-out forwards;
         }
+
         @keyframes loading {
-            to { width: 100%; }
+            to {
+                width: 100%;
+            }
         }
 
 
@@ -90,7 +98,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(0, 242, 234, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 242, 234, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -107,7 +115,7 @@
             background: linear-gradient(to bottom, rgba(0, 242, 234, 0.1), transparent 20%);
             animation: scan 6s ease-in-out infinite;
         }
-        
+
         /* Particle Canvas */
         #particles-js {
             position: fixed;
@@ -118,14 +126,27 @@
 
 
         @keyframes moveGrid {
-            from { background-position: 0 0; }
-            to { background-position: 80px 80px; }
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 80px 80px;
+            }
         }
 
         @keyframes scan {
-            0% { top: -100%; }
-            50% { top: 100%; }
-            100% { top: -100%; }
+            0% {
+                top: -100%;
+            }
+
+            50% {
+                top: 100%;
+            }
+
+            100% {
+                top: -100%;
+            }
         }
 
         .container {
@@ -134,25 +155,28 @@
             background: var(--card-bg);
             border-radius: 20px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 0 15px rgba(0,0,0,0.2), 0 0 10px var(--glow-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 10px var(--glow-color);
             overflow: hidden;
             margin: 20px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             position: relative;
             transition: box-shadow 0.3s ease, transform 0.3s ease;
-            opacity: 0; /* Hidden by default */
+            opacity: 0;
+            /* Hidden by default */
             /* 动画延迟与加载动画时间匹配 */
             animation: fadeInContainer 1s 1.5s ease-out forwards;
         }
-        
+
         @keyframes fadeInContainer {
-            to { opacity: 1; }
+            to {
+                opacity: 1;
+            }
         }
 
         .container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 35px rgba(0,0,0,0.3), 0 0 25px var(--glow-color);
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.3), 0 0 25px var(--glow-color);
         }
 
         header {
@@ -173,9 +197,20 @@
         }
 
         @keyframes glitch {
-            2%, 64% { transform: translate(2px, 0) skew(0deg); }
-            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
-            62% { transform: translate(0, 0) skew(5deg); }
+
+            2%,
+            64% {
+                transform: translate(2px, 0) skew(0deg);
+            }
+
+            4%,
+            60% {
+                transform: translate(-2px, 0) skew(0deg);
+            }
+
+            62% {
+                transform: translate(0, 0) skew(5deg);
+            }
         }
 
         .subtitle {
@@ -191,7 +226,7 @@
             position: relative;
             border-bottom: 1px solid var(--border-color);
         }
-        
+
         .content-section:last-child {
             border-bottom: none;
         }
@@ -261,10 +296,17 @@
             margin-bottom: 25px;
             display: none;
         }
-        
+
         @keyframes question-in {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .question.active {
@@ -297,7 +339,7 @@
             transition: all 0.2s ease;
             position: relative;
         }
-        
+
         .option:hover {
             background: rgba(0, 242, 234, 0.1);
             border-color: var(--primary-color);
@@ -372,10 +414,12 @@
             text-align: center;
             color: var(--primary-color);
         }
+
         .progress-label {
             margin-bottom: 8px;
             letter-spacing: 2px;
         }
+
         .progress-bar {
             height: 8px;
             background: rgba(0, 242, 234, 0.1);
@@ -392,7 +436,7 @@
             transition: width 0.5s ease;
             box-shadow: 0 0 10px var(--glow-color);
         }
-        
+
         .result {
             display: none;
             padding: 30px;
@@ -401,8 +445,15 @@
         }
 
         @keyframes fadeInResult {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .type-display {
@@ -436,17 +487,18 @@
             align-items: center;
             font-size: 1.5rem;
         }
-        
+
         .guide h3 i {
             margin-right: 10px;
         }
 
         .guide-section {
-            opacity: 0; /* Start hidden for animation */
+            opacity: 0;
+            /* Start hidden for animation */
         }
 
         .guide-section.visible {
-             animation: fadeInUp 0.6s ease-out forwards;
+            animation: fadeInUp 0.6s ease-out forwards;
         }
 
         @keyframes fadeInUp {
@@ -454,6 +506,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -490,11 +543,11 @@
             display: flex;
             align-items: center;
         }
-        
+
         .tips-box h5 i {
             margin-right: 8px;
         }
-        
+
         .tips-box p {
             font-size: 0.95rem;
             line-height: 1.6;
@@ -520,7 +573,7 @@
             opacity: 0;
             transform: scale(0.5);
         }
-        
+
         .trait.visible {
             animation: popIn 0.5s ease-out forwards;
         }
@@ -537,7 +590,7 @@
             color: white;
             box-shadow: 0 0 15px rgba(142, 84, 233, 0.5);
         }
-        
+
         #restart-btn {
             background: var(--secondary-color);
             border-color: var(--secondary-color);
@@ -554,17 +607,33 @@
             .legend-grid {
                 grid-template-columns: 1fr;
             }
-            h1 { font-size: 2rem; }
-            .type-display { font-size: 3rem; }
-            .navigation { flex-direction: column; gap: 10px; }
-            button { width: 100%; }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .type-display {
+                font-size: 3rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="preloader">
         <div class="loader-text">AI心灵探针初始化...</div>
-        <div class="loader-bar"><div class="loader-progress"></div></div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
     </div>
     <div id="particles-js"></div>
     <div id="background-animation"></div>
@@ -574,25 +643,74 @@
             <h1>校园人格AI测试</h1>
             <p class="subtitle">AI宿主匹配计划</p>
         </header>
-        
+
         <div class="content-section">
-            <p>警报：检测到校园高强度学习压力场...正在启动“心智韧性”支持协议...<br>你好，来自21世纪的同学。我是一个来自未来的AI，我的核心任务是帮助每一位大学生理解自己的心智“操作系统”（即人格特质），从而更好地管理学业压力、避免情绪内耗。了解自己，是维护心理健康的第一步。现在，我需要一位校园宿主，与我共同开启这次自我探索之旅。准备好进行认知同步了吗？</p>
+            <p>警报：检测到华中农业大学高强度学习压力场...正在启动“心智韧性”支持协议...<br>你好，来自21世纪的同学。我是一个来自未来的AI，我的核心任务是帮助每一位大学生理解自己的心智“操作系统”（即人格特质），从而更好地管理学业压力、避免情绪内耗。了解自己，是维护心理健康的第一步。现在，我需要一位校园宿主，与我共同开启这次自我探索之旅。准备好进行认知同步了吗？
+            </p>
         </div>
-        
+
         <div class="content-section">
             <h2><i class="fa-solid fa-book-open"></i> 协同职阶释义</h2>
             <div class="legend-grid">
-                <div class="legend-item"><div class="legend-code">S</div><div class="legend-details"><h3>社交续航型 (Social-Energized)</h3><p>通过与他人互动获取能量</p></div></div>
-                <div class="legend-item"><div class="legend-code">Q</div><div class="legend-details"><h3>独处充电型 (Quiet-Powered)</h3><p>通过独处和安静环境恢复能量</p></div></div>
-                <div class="legend-item"><div class="legend-code">D</div><div class="legend-details"><h3>细节核心型 (Detail-Centric)</h3><p>注重具体细节和实际应用</p></div></div>
-                <div class="legend-item"><div class="legend-code">K</div><div class="legend-details"><h3>框架关键型 (Framework-Key)</h3><p>关注整体框架和抽象概念</p></div></div>
-                <div class="legend-item"><div class="legend-code">L</div><div class="legend-details"><h3>逻辑主导型 (Logic-Led)</h3><p>依赖逻辑分析，注重客观事实</p></div></div>
-                <div class="legend-item"><div class="legend-code">C</div><div class="legend-details"><h3>关怀聚焦型 (Care-Focused)</h3><p>考虑他人感受，重视和谐关系</p></div></div>
-                <div class="legend-item"><div class="legend-code">G</div><div class="legend-details"><h3>目标计划型 (Goal-Scheduled)</h3><p>喜欢结构化和有计划的生活</p></div></div>
-                <div class="legend-item"><div class="legend-code">H</div><div class="legend-details"><h3>灵活应对型 (Flexible-Handled)</h3><p>偏好灵活随性的生活方式</p></div></div>
+                <div class="legend-item">
+                    <div class="legend-code">S</div>
+                    <div class="legend-details">
+                        <h3>社交续航型 (Social-Energized)</h3>
+                        <p>通过与他人互动获取能量</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">Q</div>
+                    <div class="legend-details">
+                        <h3>独处充电型 (Quiet-Powered)</h3>
+                        <p>通过独处和安静环境恢复能量</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">D</div>
+                    <div class="legend-details">
+                        <h3>细节核心型 (Detail-Centric)</h3>
+                        <p>注重具体细节和实际应用</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">K</div>
+                    <div class="legend-details">
+                        <h3>框架关键型 (Framework-Key)</h3>
+                        <p>关注整体框架和抽象概念</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">L</div>
+                    <div class="legend-details">
+                        <h3>逻辑主导型 (Logic-Led)</h3>
+                        <p>依赖逻辑分析，注重客观事实</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">C</div>
+                    <div class="legend-details">
+                        <h3>关怀聚焦型 (Care-Focused)</h3>
+                        <p>考虑他人感受，重视和谐关系</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">G</div>
+                    <div class="legend-details">
+                        <h3>目标计划型 (Goal-Scheduled)</h3>
+                        <p>喜欢结构化和有计划的生活</p>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-code">H</div>
+                    <div class="legend-details">
+                        <h3>灵活应对型 (Flexible-Handled)</h3>
+                        <p>偏好灵活随性的生活方式</p>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
         <div class="test-container">
             <div class="progress-container">
                 <div class="progress-label">AI同步率</div>
@@ -600,11 +718,11 @@
                     <div class="progress" id="progress"></div>
                 </div>
             </div>
-            
+
             <div id="question-container">
                 <!-- 问题将由JavaScript动态生成 -->
             </div>
-            
+
             <div class="navigation">
                 <button id="prev-btn" disabled>
                     <i class="fa fa-arrow-left"></i> 上一轮同步
@@ -614,37 +732,37 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="result" id="result">
             <h2>匹配成功！你的AI宿主档案已生成</h2>
             <div class="type-display" id="type-result"></div>
             <div class="type-title" id="type-title"></div>
-            
+
             <div class="traits" id="traits-container"></div>
-            
+
             <div class="guide">
                 <h3><i class="fa-solid fa-brain"></i> 宿主心智健康协同协议</h3>
                 <div class="guide-section">
                     <h4><i class="fa-solid fa-graduation-cap"></i> 高效学习与能量管理</h4>
                     <p id="study-guide"></p>
                 </div>
-                
+
                 <div class="guide-section">
                     <h4><i class="fa-solid fa-users"></i> 和谐人际与沟通策略</h4>
                     <p id="collaboration-guide"></p>
                     <div class="tips-box" id="collaboration-tip"></div>
                 </div>
-                
+
                 <div class="guide-section">
                     <h4><i class="fa-solid fa-heart-pulse"></i> 核心：压力调节与情绪健康</h4>
                     <p id="stress-guide"></p>
                 </div>
-                 <div class="guide-section">
+                <div class="guide-section">
                     <h4><i class="fa-solid fa-chart-line"></i> AI协同进化建议</h4>
                     <p id="growth-guide"></p>
                 </div>
             </div>
-            
+
             <button id="restart-btn">
                 <i class="fa fa-refresh"></i> 重新匹配
             </button>
@@ -654,7 +772,7 @@
     <!-- 使用国内CDN加速Particles.js -->
     <script src="https://cdn.bootcdn.net/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // --- Preloader Logic ---
             const preloader = document.getElementById('preloader');
             window.addEventListener('load', () => {
@@ -669,190 +787,200 @@
 
             // --- Particles.js Config ---
             particlesJS('particles-js', {
-              "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#00f2ea" }, "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }, "polygon": { "nb_sides": 5 }, }, "opacity": { "value": 0.5, "random": false, "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 3, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } }, "line_linked": { "enable": true, "distance": 150, "color": "#00f2ea", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } } },
-              "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 200, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } } },
-              "retina_detect": true
+                "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#00f2ea" }, "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }, "polygon": { "nb_sides": 5 }, }, "opacity": { "value": 0.5, "random": false, "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 3, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } }, "line_linked": { "enable": true, "distance": 150, "color": "#00f2ea", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } } },
+                "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 200, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } } },
+                "retina_detect": true
             });
 
             // --- Test Logic ---
             const questions = [
-                { text: "周末你更倾向于：", options: [{ text: "参加社团活动或和朋友出行", value: "S" }, { text: "在图书馆或宿舍独自看书、网上冲浪", value: "Q" }]},
-                { text: "一场热闹的小组讨论结束后，你感觉：", options: [{ text: "意犹未尽，思维更活跃了", value: "S" }, { text: "有些疲惫，需要独处消化一下", value: "Q" }]},
-                { text: "当你感到能量不足时，你如何恢复？", options: [{ text: "和朋友聊天、外出活动", value: "S" }, { text: "独处休息、整理思绪", value: "Q" }]},
-                { text: "写一份实验报告，哪个环节让你更有成就感？", options: [{ text: "确保每一个数据精准无误，步骤描述清晰", value: "D" }, { text: "从数据中发现新的规律，并提出独特的见解", value: "K" }]},
-                { text: "读一篇论文时，你的第一反应是：", options: [{ text: "关注具体的数据、案例和方法", value: "D" }, { text: "先看摘要和框架，把握整体思路和理论", value: "K" }]},
-                { text: "规划一个学期项目时，你更倾向于：", options: [{ text: "立刻列出具体可执行的步骤和时间节点", value: "D" }, { text: "先构想最终的创新效果和宏观意义", value: "K" }]},
-                { text: "小组作业出现分歧时，你优先考虑：", options: [{ text: "分析利弊，选择逻辑上最优的方案", value: "L" }, { text: "照顾成员情绪，寻求让大家都舒服的共识", value: "C" }]},
-                { text: "朋友向你倾诉烦恼，你更可能：", options: [{ text: "帮TA分析问题根源，提出解决方案", value: "L" }, { text: "先共情安慰，让TA感受到被理解和支持", value: "C" }]},
-                { text: "评价一个方案的好坏时，你更依赖：", options: [{ text: "客观、公正的标准和逻辑的严谨性", value: "L" }, { text: "它是否符合你的价值观，以及对相关人员的影响", value: "C" }]},
-                { text: "对于日常生活，你更喜欢：", options: [{ text: "有详细的计划和明确的日程表，一切尽在掌握", value: "G" }, { text: "保持开放和灵活性，随时应对新的可能性", value: "H" }]},
-                { text: "离deadline还有一周，你的状态更可能是：", options: [{ text: "已经完成大部分，正在检查和优化", value: "G" }, { text: "还没正式开始，但相信最后几天能高效搞定", value: "H" }]},
-                { text: "选择一门选修课时，你更看重：", options: [{ text: "清晰的课程大纲、明确的评分标准", value: "G" }, { text: "有趣且自由的探索空间、能激发灵感", value: "H" }]}
+                { text: "周末你更倾向于：", options: [{ text: "参加社团活动或和朋友出行", value: "S" }, { text: "在图书馆或宿舍独自看书、网上冲浪", value: "Q" }] },
+                { text: "一场热闹的小组讨论结束后，你感觉：", options: [{ text: "意犹未尽，思维更活跃了", value: "S" }, { text: "有些疲惫，需要独处消化一下", value: "Q" }] },
+                { text: "当你感到能量不足时，你如何恢复？", options: [{ text: "和朋友聊天、外出活动", value: "S" }, { text: "独处休息、整理思绪", value: "Q" }] },
+                { text: "写一份实验报告，哪个环节让你更有成就感？", options: [{ text: "确保每一个数据精准无误，步骤描述清晰", value: "D" }, { text: "从数据中发现新的规律，并提出独特的见解", value: "K" }] },
+                { text: "读一篇论文时，你的第一反应是：", options: [{ text: "关注具体的数据、案例和方法", value: "D" }, { text: "先看摘要和框架，把握整体思路和理论", value: "K" }] },
+                { text: "规划一个学期项目时，你更倾向于：", options: [{ text: "立刻列出具体可执行的步骤和时间节点", value: "D" }, { text: "先构想最终的创新效果和宏观意义", value: "K" }] },
+                { text: "小组作业出现分歧时，你优先考虑：", options: [{ text: "分析利弊，选择逻辑上最优的方案", value: "L" }, { text: "照顾成员情绪，寻求让大家都舒服的共识", value: "C" }] },
+                { text: "朋友向你倾诉烦恼，你更可能：", options: [{ text: "帮TA分析问题根源，提出解决方案", value: "L" }, { text: "先共情安慰，让TA感受到被理解和支持", value: "C" }] },
+                { text: "评价一个方案的好坏时，你更依赖：", options: [{ text: "客观、公正的标准和逻辑的严谨性", value: "L" }, { text: "它是否符合你的价值观，以及对相关人员的影响", value: "C" }] },
+                { text: "对于日常生活，你更喜欢：", options: [{ text: "有详细的计划和明确的日程表，一切尽在掌握", value: "G" }, { text: "保持开放和灵活性，随时应对新的可能性", value: "H" }] },
+                { text: "离deadline还有一周，你的状态更可能是：", options: [{ text: "已经完成大部分，正在检查和优化", value: "G" }, { text: "还没正式开始，但相信最后几天能高效搞定", value: "H" }] },
+                { text: "选择一门选修课时，你更看重：", options: [{ text: "清晰的课程大纲、明确的评分标准", value: "G" }, { text: "有趣且自由的探索空间、能激发灵感", value: "H" }] }
             ];
-            
+
             const typeGuides = {
-                "QDLG": { 
-                    title: "职阶：签到官（细节规划派）", 
-                    traits: ["严谨务实", "注重细节", "责任心强", "擅长规划"], 
-                    study: "你的超能力是秩序感！在图书馆或安静自习室的固定座位，你能最大化专注力。推荐使用“番茄工作法”配合精细到小时的任务清单，每完成一项就用荧光笔划掉，这种掌控感会让你极度舒适。对于复杂科目，先绘制逻辑树或思维导图，再填充细节，完美契合你先构筑体系再深入细节的习惯。", 
-                    collab: "你是天生的项目经理（PM）。主动请缨负责制定项目计划、拆分任务和跟进DDL。使用Trello或Notion等工具，将任务可视化，让每个人都清楚自己的职责。你的存在能避免团队陷入混乱和跑偏。", 
-                    tipTitle: "协同技巧：如何“优雅地”催进度？", 
-                    tipContent: "可以这样说：‘嘿，我看到我们共同负责的A部分，你那边的资料最晚周三需要给我，这样我周四周五才有时间整合。如果遇到困难了，随时和我说，我们一起想办法！’——既明确了时间线，又表达了善意。", 
-                    stress: "当计划被意外打乱时，启动“B计划”预案。与其焦虑，不如将这视为对你应变能力的挑战。通过整理书桌、按类别归档电脑文件等有秩序的小任务，可以快速恢复你的内心平静。", 
-                    growth: "走出舒适区，尝试一些需要“即兴发挥”的活动，比如辩论赛的自由辩论环节。这能锻炼你在没有万全准备的情况下，依然能从容应对的能力，让你成为更全面的规划者。" 
+                "QDLG": {
+                    title: "职阶：签到官（细节规划派）",
+                    traits: ["严谨务实", "注重细节", "责任心强", "擅长规划"],
+                    study: "你的超能力是秩序感！在图书馆或安静自习室的固定座位，你能最大化专注力。推荐使用“番茄工作法”配合精细到小时的任务清单，每完成一项就用荧光笔划掉，这种掌控感会让你极度舒适。对于复杂科目，先绘制逻辑树或思维导图，再填充细节，完美契合你先构筑体系再深入细节的习惯。",
+                    collab: "你是天生的项目经理（PM）。主动请缨负责制定项目计划、拆分任务和跟进DDL。使用Trello或Notion等工具，将任务可视化，让每个人都清楚自己的职责。你的存在能避免团队陷入混乱和跑偏。",
+                    tipTitle: "协同技巧：如何“优雅地”催进度？",
+                    tipContent: "可以这样说：‘嘿，我看到我们共同负责的A部分，你那边的资料最晚周三需要给我，这样我周四周五才有时间整合。如果遇到困难了，随时和我说，我们一起想办法！’——既明确了时间线，又表达了善意。",
+                    stress: "当计划被意外打乱时，启动“B计划”预案。与其焦虑，不如将这视为对你应变能力的挑战。通过整理书桌、按类别归档电脑文件等有秩序的小任务，可以快速恢复你的内心平静。",
+                    growth: "走出舒适区，尝试一些需要“即兴发挥”的活动，比如辩论赛的自由辩论环节。这能锻炼你在没有万全准备的情况下，依然能从容应对的能力，让你成为更全面的规划者。"
                 },
-                "QDCG": { 
-                    title: "职阶：守护者（暖心规划派）", 
-                    traits: ["温柔体贴", "善于观察", "重视他人需求", "做事细致"], 
-                    study: "“陪伴式学习”是你的能量源泉。与一两个志同道合的朋友组成学习小组，在图书馆的角落互相监督，氛围感能让你的效率倍增。你制作的笔记堪称“艺术品”，不妨将其分享到学习社群，帮助他人的同时也能收获成就感。", 
-                    collab: "你是团队的“首席情感官”（CEO）。在讨论陷入僵局时，你总能敏锐地察觉到大家的情绪，并用“我们先休息五分钟，吃点东西怎么样？”来打破僵局。你善于发现每个人的闪光点，并据此分配任务，让团队合作变成一场愉快的旅程。", 
-                    tipTitle: "协同技巧：如何调解组内矛盾？", 
-                    tipContent: "可以这样说：‘我感觉A同学和B同学的想法都很有道理，只是角度不同。我们能不能试着把A的严谨和B的创意结合起来，看看会不会有1+1>2的效果？’", 
-                    stress: "学会设立“情感边界”。关心他人是你的优点，但过度共情会消耗你的能量。每天留出至少一小时的“独处充电时间”，做一些能让自己完全放松的事，比如听音乐、看一部治愈系电影。", 
-                    growth: "勇敢地表达自己的需求和观点。你的想法同样珍贵，值得被听见。尝试在小组中第一个发言，或者竞选一个需要公开表达的职位，将你的温柔力量转化为影响力。" 
+                "QDCG": {
+                    title: "职阶：守护者（暖心规划派）",
+                    traits: ["温柔体贴", "善于观察", "重视他人需求", "做事细致"],
+                    study: "“陪伴式学习”是你的能量源泉。与一两个志同道合的朋友组成学习小组，在图书馆的角落互相监督，氛围感能让你的效率倍增。你制作的笔记堪称“艺术品”，不妨将其分享到学习社群，帮助他人的同时也能收获成就感。",
+                    collab: "你是团队的“首席情感官”（CEO）。在讨论陷入僵局时，你总能敏锐地察觉到大家的情绪，并用“我们先休息五分钟，吃点东西怎么样？”来打破僵局。你善于发现每个人的闪光点，并据此分配任务，让团队合作变成一场愉快的旅程。",
+                    tipTitle: "协同技巧：如何调解组内矛盾？",
+                    tipContent: "可以这样说：‘我感觉A同学和B同学的想法都很有道理，只是角度不同。我们能不能试着把A的严谨和B的创意结合起来，看看会不会有1+1>2的效果？’",
+                    stress: "学会设立“情感边界”。关心他人是你的优点，但过度共情会消耗你的能量。每天留出至少一小时的“独处充电时间”，做一些能让自己完全放松的事，比如听音乐、看一部治愈系电影。",
+                    growth: "勇敢地表达自己的需求和观点。你的想法同样珍贵，值得被听见。尝试在小组中第一个发言，或者竞选一个需要公开表达的职位，将你的温柔力量转化为影响力。"
                 },
-                "QKCG": { 
-                    title: "职阶：引路人（洞察引导派）", 
-                    traits: ["深邃内敛", "富有洞察力", "追求意义感", "善于共情"], 
-                    study: "你追求的是知识的深度和意义。选择一个能激发你思考的“圣地”，如图书馆靠窗的单人座位或校园咖啡馆的角落。学习时，使用“费曼学习法”，尝试将复杂的理论用最简单的语言讲给“小白”听，这能让你真正内化知识。", 
-                    collab: "你是团队的“灵魂捕手”。你总能洞察到问题的本质和团队成员未说出口的需求。在头脑风暴时，你擅长提出深刻的问题，引导讨论走向更有价值的方向，避免团队在表面问题上兜圈子。", 
-                    tipTitle: "协同技巧：如何启发沉默的组员？", 
-                    tipContent: "可以这样说：‘我记得你上次提过对这个话题有独特的看法，我们都很想听听你的思路，可以和我们分享一下吗？’——给予对方表达的信心和阶梯。", 
-                    stress: "当思考过度陷入“精神内耗”时，尝试进行“正念行走”。在校园里慢走，专注于你的呼吸和脚步，感受风吹过皮肤的感觉，将注意力从繁杂的思绪拉回到当下。", 
-                    growth: "将你的洞察力付诸行动。除了思考“为什么”，更要规划“怎么做”。尝试参与一个完整的科研项目，从提出假设到动手验证，将你的深刻思想转化为可见的成果。" 
+                "QKCG": {
+                    title: "职阶：引路人（洞察引导派）",
+                    traits: ["深邃内敛", "富有洞察力", "追求意义感", "善于共情"],
+                    study: "你追求的是知识的深度和意义。选择一个能激发你思考的“圣地”，如图书馆靠窗的单人座位或校园咖啡馆的角落。学习时，使用“费曼学习法”，尝试将复杂的理论用最简单的语言讲给“小白”听，这能让你真正内化知识。",
+                    collab: "你是团队的“灵魂捕手”。你总能洞察到问题的本质和团队成员未说出口的需求。在头脑风暴时，你擅长提出深刻的问题，引导讨论走向更有价值的方向，避免团队在表面问题上兜圈子。",
+                    tipTitle: "协同技巧：如何启发沉默的组员？",
+                    tipContent: "可以这样说：‘我记得你上次提过对这个话题有独特的看法，我们都很想听听你的思路，可以和我们分享一下吗？’——给予对方表达的信心和阶梯。",
+                    stress: "当思考过度陷入“精神内耗”时，尝试进行“正念行走”。在校园里慢走，专注于你的呼吸和脚步，感受风吹过皮肤的感觉，将注意力从繁杂的思绪拉回到当下。",
+                    growth: "将你的洞察力付诸行动。除了思考“为什么”，更要规划“怎么做”。尝试参与一个完整的科研项目，从提出假设到动手验证，将你的深刻思想转化为可见的成果。"
                 },
-                "QKLG": { 
-                    title: "职阶：规划王（战略规划派）", 
-                    traits: ["冷静理智", "目标导向", "擅长战略规划", "逻辑缜密"], 
-                    study: "你需要一个绝对纯净的“信息茧房”来进行深度工作。在学习前，用“SWOT分析法”审视你的知识体系，找出优势、劣势、机会和威胁，然后制定出最高效的复习策略。你的大脑就像一台超级计算机，需要精准的输入才能高效产出。", 
-                    collab: "你是团队的“总设计师”。在项目开始时，你能快速构建出整个项目的蓝图和最优路径。你无法容忍低效的讨论，会用“这个问题偏离了我们的核心目标，建议先回到……”来及时纠偏，确保团队的每一步都走在最高效的路径上。", 
-                    tipTitle: "协同技巧：如何提出反对意见？", 
-                    tipContent: "对事不对人，用逻辑说话：‘这个方案很有创意，但从逻辑上推演，在第三步可能会遇到XX问题。我有一个备选方案，或许可以规避这个风险，大家看怎么样？’", 
-                    stress: "学会接受“足够好”而非“绝对完美”。当陷入对细节的过度优化时，问自己：“这个改动对最终结果的影响超过5%吗？”如果答案是否定的，果断放手。通过解决复杂的数独或策略类游戏来“主动降噪”，满足大脑对逻辑的需求。", 
-                    growth: "在你的逻辑框架中，加入“人”这个变量。尝试理解和接纳团队成员不同的工作风格和情感需求，这会让你的领导力更具温度和韧性。一个伟大的设计师，不仅要设计出完美的图纸，还要能带领团队把它建造出来。" 
+                "QKLG": {
+                    title: "职阶：逻辑怪（逻辑思辨派）",
+                    traits: ["冷静抽离", "擅长解构", "逻辑闭环强迫症", "数据敏感"],
+                    study: "你的超能力是“逻辑建模”！面对复杂知识，先拆解成“前提-论证-结论”的三段式结构，再用符号或公式梳理关联。推荐用XMind画“逻辑树”而非普通思维导图，重点标注因果关系和例外情况。刷题时优先攻克证明题或推理题，这种“智力闯关”能让你快速进入状态，而死记硬背会让你极度不适。",
+                    collab: "你是团队的“逻辑安检员”。项目方案必须经过你的“推演测试”，从目标到执行路径，任何逻辑漏洞都逃不过你的眼睛。你习惯用“如果A发生，会导致B，进而影响C”的句式分析风险，能有效避免团队因“想当然”而踩坑。",
+                    tipTitle: "协同技巧：如何“无痛”指出逻辑漏洞？",
+                    tipContent: "用假设性推演代替直接否定：‘如果我们按这个方案执行，假设出现用户不配合的情况，之前的推导链条是不是就断了？或许我们可以先加一个备选预案来补全逻辑？’",
+                    stress: "当遇到“非逻辑决策”时，启动“数据缓冲”模式。与其直接反驳，不如快速搜集相关数据或案例，用客观证据支撑你的逻辑。通过解数学题、玩密室逃脱等活动，让大脑在熟悉的逻辑环境中恢复秩序感。",
+                    growth: "尝试理解“非逻辑价值”。不是所有决策都依赖理性，比如团队士气、用户情感等感性因素同样重要。可以从分析广告文案的情感逻辑入手，学习在理性框架中容纳感性变量，让你的逻辑能力更具弹性。"
                 },
-                "QDLH": { 
-                    title: "职阶：工匠师（实干应变派）", 
-                    traits: ["冷静务实", "动手能力强", "灵活应变", "做事高效"], 
-                    study: "“做中学”是你的信条。理论知识对你来说只是工具，实验室、工作坊才是你真正发光的舞台。遇到难题，你的第一反应不是翻书，而是动手拆解、尝试。这种“实践出真知”的方式让你总能找到最接地气的解决方案。", 
-                    collab: "你是团队中的“终结者”。当别人还在为理论争论不休时，你已经默默地做出了一个可行的样品或修复了bug。你不喜欢繁琐的会议，更喜欢用“我先试试”来代替长篇大论，用结果说话。", 
-                    tipTitle: "协同技巧：如何应对不切实际的方案？", 
-                    tipContent: "用实践结果来沟通：‘这个想法听起来很棒，我花半小时做了个简单的模型来验证它，发现可能会遇到XX问题。我们是不是可以先调整一下这里？’", 
-                    stress: "当你因找不到解决方案而烦躁时，暂时离开问题本身。去做一些同样需要动手但更简单放松的事，比如拼装一个模型、修理一下自行车。这种“主动暂停”能让你的大脑在后台继续处理问题，灵感往往在不经意间闪现。", 
-                    growth: "在动手之前，花15分钟进行简单的规划。一张草图、一个流程节点，都能让你的动手能力发挥出更大的价值，避免“战术勤奋，战略懒惰”。尝试将你的实践经验总结成可分享的教程，这会让你对知识的理解更加系统。", 
+                "QDLH": {
+                    title: "职阶：工匠师（实干应变派）",
+                    traits: ["冷静务实", "动手能力强", "灵活应变", "做事高效"],
+                    study: "“做中学”是你的信条。理论知识对你来说只是工具，实验室、工作坊才是你真正发光的舞台。遇到难题，你的第一反应不是翻书，而是动手拆解、尝试。这种“实践出真知”的方式让你总能找到最接地气的解决方案。",
+                    collab: "你是团队中的“终结者”。当别人还在为理论争论不休时，你已经默默地做出了一个可行的样品或修复了bug。你不喜欢繁琐的会议，更喜欢用“我先试试”来代替长篇大论，用结果说话。",
+                    tipTitle: "协同技巧：如何应对不切实际的方案？",
+                    tipContent: "用实践结果来沟通：‘这个想法听起来很棒，我花半小时做了个简单的模型来验证它，发现可能会遇到XX问题。我们是不是可以先调整一下这里？’",
+                    stress: "当你因找不到解决方案而烦躁时，暂时离开问题本身。去做一些同样需要动手但更简单放松的事，比如拼装一个模型、修理一下自行车。这种“主动暂停”能让你的大脑在后台继续处理问题，灵感往往在不经意间闪现。",
+                    growth: "在动手之前，花15分钟进行简单的规划。一张草图、一个流程节点，都能让你的动手能力发挥出更大的价值，避免“战术勤奋，战略懒惰”。尝试将你的实践经验总结成可分享的教程，这会让你对知识的理解更加系统。",
                 },
-                "QDCH": { 
-                    title: "职阶：艺术家（细腻感知派）", 
-                    traits: ["温柔细腻", "热爱生活", "注重感官体验", "感知力强"], 
-                    study: "学习需要“仪式感”。一张整洁的书桌、一杯冒着热气的花茶、一首舒缓的背景音乐，都能让你的学习状态“一键启动”。你的笔记就像一本手账，用不同颜色的笔和可爱的小插图把枯燥的知识点变得生动起来，这本身就是一种高效的记忆方式。", 
-                    collab: "你是团队的“首席体验官”。你会主动为大家准备零食，在休息时分享有趣的视频，让紧张的赶工也变得温馨。你擅长用“我们来投票吧”或者“这个方案听起来让大家都很兴奋”来推动决策，让每个人都感到被尊重。", 
-                    tipTitle: "协同技巧：如何提出一个“软”建议？", 
-                    tipContent: "用分享感受的方式：‘读完这个方案，我感觉心里暖暖的，如果能在结尾加上一个对未来的展望，会不会让老师更感动呀？’", 
-                    stress: "进行“五感放松法”。感到压力时，泡个热水脚（触觉）、点上香薰（嗅觉）、吃一块喜欢的甜点（味觉）、看窗外的绿植（视觉）、听一首纯音乐（听觉），让感官的愉悦冲淡内心的焦虑。", 
-                    growth: "在你的感性世界里，加入一把理性的标尺。学习使用一些简单的项目管理工具来跟进进度，确保你的创意和美好的想法能够按时落地，而不是仅仅停留在想象中。" 
+                "QDCH": {
+                    title: "职阶：艺术家（细腻感知派）",
+                    traits: ["温柔细腻", "热爱生活", "注重感官体验", "感知力强"],
+                    study: "学习需要“仪式感”。一张整洁的书桌、一杯冒着热气的花茶、一首舒缓的背景音乐，都能让你的学习状态“一键启动”。你的笔记就像一本手账，用不同颜色的笔和可爱的小插图把枯燥的知识点变得生动起来，这本身就是一种高效的记忆方式。",
+                    collab: "你是团队的“首席体验官”。你会主动为大家准备零食，在休息时分享有趣的视频，让紧张的赶工也变得温馨。你擅长用“我们来投票吧”或者“这个方案听起来让大家都很兴奋”来推动决策，让每个人都感到被尊重。",
+                    tipTitle: "协同技巧：如何提出一个“软”建议？",
+                    tipContent: "用分享感受的方式：‘读完这个方案，我感觉心里暖暖的，如果能在结尾加上一个对未来的展望，会不会让老师更感动呀？’",
+                    stress: "进行“五感放松法”。感到压力时，泡个热水脚（触觉）、点上香薰（嗅觉）、吃一块喜欢的甜点（味觉）、看窗外的绿植（视觉）、听一首纯音乐（听觉），让感官的愉悦冲淡内心的焦虑。",
+                    growth: "在你的感性世界里，加入一把理性的标尺。学习使用一些简单的项目管理工具来跟进进度，确保你的创意和美好的想法能够按时落地，而不是仅仅停留在想象中。"
                 },
-                "QKCH": { 
-                    title: "职阶：治愈者（共情理想派）", 
-                    traits: ["理想主义", "情感丰富", "善于深度思考", "注重精神共鸣"], 
-                    study: "你学习的动力源于“意义感”。选择那些能触动你内心、让你觉得能让世界更美好一点的课题，你会爆发出惊人的能量。写论文时，不要害怕表达你的真实情感和价值观，这正是你文章的闪光点。你的学习不是为了分数，而是一场灵魂的探索。", 
-                    collab: "你是团队的“价值观守护者”。你总能确保团队的最终成果不仅是技术上可行的，更是有温度、有意义的。你擅长倾听每个人的声音，并从中找到那个能将大家凝聚在一起的“共同理想”。", 
-                    tipTitle: "协同技巧：如何将讨论拉回初心？", 
-                    tipContent: "可以这样问：‘大家，我们最初做这个项目的目的是什么来着？我们现在的讨论是不是离那个美好的目标越来越远了呢？’", 
-                    stress: "当你因现实与理想的差距而感到失落时，通过“书写疗愈”来释放情绪。把你的烦恼、困惑、期待都写下来，或者去读那些能给你力量的传记和诗歌。记住，你不是一个人在战斗。", 
-                    growth: "学会将宏大的理想分解成一个个小而美的“行动步道”。比如，“让世界更美好”可以从“帮助身边的一个同学解决学习困难”开始。这种“微小但确切的幸福”能持续为你提供能量，让你在理想的道路上走得更远。" 
+                "QKCH": {
+                    title: "职阶：治愈者（共情理想派）",
+                    traits: ["理想主义", "情感丰富", "善于深度思考", "注重精神共鸣"],
+                    study: "你学习的动力源于“意义感”。选择那些能触动你内心、让你觉得能让世界更美好一点的课题，你会爆发出惊人的能量。写论文时，不要害怕表达你的真实情感和价值观，这正是你文章的闪光点。你的学习不是为了分数，而是一场灵魂的探索。",
+                    collab: "你是团队的“价值观守护者”。你总能确保团队的最终成果不仅是技术上可行的，更是有温度、有意义的。你擅长倾听每个人的声音，并从中找到那个能将大家凝聚在一起的“共同理想”。",
+                    tipTitle: "协同技巧：如何将讨论拉回初心？",
+                    tipContent: "可以这样问：‘大家，我们最初做这个项目的目的是什么来着？我们现在的讨论是不是离那个美好的目标越来越远了呢？’",
+                    stress: "当你因现实与理想的差距而感到失落时，通过“书写疗愈”来释放情绪。把你的烦恼、困惑、期待都写下来，或者去读那些能给你力量的传记和诗歌。记住，你不是一个人在战斗。",
+                    growth: "学会将宏大的理想分解成一个个小而美的“行动步道”。比如，“让世界更美好”可以从“帮助身边的一个同学解决学习困难”开始。这种“微小但确切的幸福”能持续为你提供能量，让你在理想的道路上走得更远。"
                 },
-                "QKLH": { 
-                    title: "职阶：逻辑怪（逻辑思辨派）", 
-                    traits: ["好奇思辨", "逻辑缜密", "喜欢探索本质", "善于拆解问题"], 
-                    study: "你的大脑是一台高性能的“概念粉碎机”。拿到任何知识，你都会习惯性质疑、拆解、重组，直到完全理解其底层的逻辑。对你来说，最有效的学习方式是“跨学科连接”，比如用数学的逻辑去理解哲学，用物理的定律去思考社会现象。", 
-                    collab: "你是团队的“首席逻辑官”。你的任务就是揪出方案中所有不合理、不严谨的“bug”。你也许不擅长活跃气氛，但只要有你在，团队的成果就绝不会在逻辑上被人抓住把柄。", 
-                    tipTitle: "协同技巧：如何“优雅地”指出漏洞？", 
-                    tipContent: "用探索的口吻代替评判：‘这个思路很有趣，我顺着想了一下，发现如果出现XX情况，这个逻辑链好像就断了。是不是我们可以在这里加一个前提条件来完善它？’", 
-                    stress: "当大脑因高速运转而“过热”时，需要进行“智力游戏”来降温。玩一局象棋、解一道复杂的数独题，或者看一部烧脑的悬疑电影，让你的逻辑脑在另一个战场上得到满足和放松。", 
-                    growth: "学会欣赏“模糊的美”。不是所有问题都有标准答案，不是所有决策都能靠纯逻辑推演。尝试去理解他人的情感和直觉，在你的逻辑世界里，为人文关怀留一扇窗。" 
+                // "QKLH": { 
+                //     title: "职阶：逻辑怪（逻辑思辨派）", 
+                //     traits: ["好奇思辨", "逻辑缜密", "喜欢探索本质", "善于拆解问题"], 
+                //     study: "你的大脑是一台高性能的“概念粉碎机”。拿到任何知识，你都会习惯性质疑、拆解、重组，直到完全理解其底层的逻辑。对你来说，最有效的学习方式是“跨学科连接”，比如用数学的逻辑去理解哲学，用物理的定律去思考社会现象。", 
+                //     collab: "你是团队的“首席逻辑官”。你的任务就是揪出方案中所有不合理、不严谨的“bug”。你也许不擅长活跃气氛，但只要有你在，团队的成果就绝不会在逻辑上被人抓住把柄。", 
+                //     tipTitle: "协同技巧：如何“优雅地”指出漏洞？", 
+                //     tipContent: "用探索的口吻代替评判：‘这个思路很有趣，我顺着想了一下，发现如果出现XX情况，这个逻辑链好像就断了。是不是我们可以在这里加一个前提条件来完善它？’", 
+                //     stress: "当大脑因高速运转而“过热”时，需要进行“智力游戏”来降温。玩一局象棋、解一道复杂的数独题，或者看一部烧脑的悬疑电影，让你的逻辑脑在另一个战场上得到满足和放松。", 
+                //     growth: "学会欣赏“模糊的美”。不是所有问题都有标准答案，不是所有决策都能靠纯逻辑推演。尝试去理解他人的情感和直觉，在你的逻辑世界里，为人文关怀留一扇窗。" 
+                // },
+                "SDLH": {
+                    title: "职阶：动手派（行动社交派）",
+                    traits: ["活泼外向", "行动力强", "擅长把握当下", "充满活力"],
+                    study: "“理论？先搞起来再说！”是你的人生格言。在互动和实践中，你的学习效率最高。组织或参加一个学习研讨小组，通过“教是最好的学”的方式，边给别人讲题边巩固自己的知识。你的战场在实验室、在社会实践的第一线，而不是安静的图书馆。",
+                    collab: "你是团队的“引擎”。当大家还在犹豫时，你已经用“先做个Demo出来看看”来打破僵局。你擅长用热情感染大家，用“搞定这个我们就去吃大餐！”来激励士气，是天生的行动派和氛围组组长。",
+                    tipTitle: "协同技巧：如何带动拖延的团队？",
+                    tipContent: "用行动邀请代替口头催促：‘这个部分有点卡住了，我先动手把框架搭起来，你们随时补充想法，怎么样？我们一起把它搞定！’",
+                    stress: "将压力“动”掉。感到焦虑时，立刻去球场打一场酣畅淋漓的比赛，或者约上朋友去爬山。身体的疲惫会带走精神的疲惫，让你快速恢复能量满格的状态。",
+                    growth: "在行动前，给自己一个“5分钟战略暂停”。用一张纸简单画一下行动的路线图，思考一下可能遇到的问题。这短短的5分钟，会让你的行动更精准，而不是仅仅依靠试错。学会复盘，从行动的经验中提炼出可复制的方法论。"
                 },
-                "SDLH": { 
-                    title: "职阶：动手派（行动社交派）", 
-                    traits: ["活泼外向", "行动力强", "擅长把握当下", "充满活力"], 
-                    study: "“理论？先搞起来再说！”是你的人生格言。在互动和实践中，你的学习效率最高。组织或参加一个学习研讨小组，通过“教是最好的学”的方式，边给别人讲题边巩固自己的知识。你的战场在实验室、在社会实践的第一线，而不是安静的图书馆。", 
-                    collab: "你是团队的“引擎”。当大家还在犹豫时，你已经用“先做个Demo出来看看”来打破僵局。你擅长用热情感染大家，用“搞定这个我们就去吃大餐！”来激励士气，是天生的行动派和氛围组组长。", 
-                    tipTitle: "协同技巧：如何带动拖延的团队？", 
-                    tipContent: "用行动邀请代替口头催促：‘这个部分有点卡住了，我先动手把框架搭起来，你们随时补充想法，怎么样？我们一起把它搞定！’", 
-                    stress: "将压力“动”掉。感到焦虑时，立刻去球场打一场酣畅淋漓的比赛，或者约上朋友去爬山。身体的疲惫会带走精神的疲惫，让你快速恢复能量满格的状态。", 
-                    growth: "在行动前，给自己一个“5分钟战略暂停”。用一张纸简单画一下行动的路线图，思考一下可能遇到的问题。这短短的5分钟，会让你的行动更精准，而不是仅仅依靠试错。学会复盘，从行动的经验中提炼出可复制的方法论。" 
+                "SDCH": {
+                    title: "职阶：氛围组（创意氛围派）",
+                    traits: ["活力四射", "擅长热场", "情绪感知力强", "自带快乐Buff"],
+                    study: "你的学习效率和“氛围浓度”直接挂钩！拉上3-5个好友组成“快乐学习搭子”，用“学1小时奖励10分钟追剧”的小游戏增加趣味性。在书桌贴满可爱贴纸、用彩色荧光笔做笔记，甚至边听轻快的歌边背单词，这些“非传统”方式反而能让你记得更牢。",
+                    collab: "你是团队的“氛围发动机”。项目启动时，你会主动组织破冰小游戏；赶工累了，你能立刻掏出零食和笑话活跃气氛；提交成果前，你还会用有趣的表情包制作进度海报，让整个协作过程充满欢声笑语。",
+                    tipTitle: "协同技巧：如何快速激活冷场的会议？",
+                    tipContent: "用轻松的互动打破僵局：‘大家别这么严肃嘛！我们先来个小互动——每人用一个emoji形容现在的项目状态，我先来，我是🥳，因为觉得这个创意超酷！’",
+                    stress: "当氛围压力过载时，进行“快乐转移”。立刻离开当前环境，去喝杯喜欢的奶茶、看段搞笑短视频，用外界的快乐信号中和压力。记住，你是氛围的创造者，不是压力的承接者。",
+                    growth: "学习“氛围节奏把控”。除了制造快乐，也要学会在需要专注时引导团队进入状态，比如用“我们先专注30分钟，之后我给大家分享个好玩的事儿”来平衡松弛与紧张，让氛围真正为目标服务。"
                 },
-                "SDCH": { 
-                    title: "职阶：审美家（活力体验派）", 
-                    traits: ["热情开朗", "热爱生活", "擅长感知情绪", "注重体验感"], 
-                    study: "让学习变成一场“派对”。和朋友们一起去有格调的咖啡馆学习，或者把宿舍装饰成温馨的学习角。使用有趣的App（比如Forest、Anki）来增加学习的游戏感。把知识点编成朗朗上口的口诀或画成可爱的漫画，是你独特的记忆魔法。", 
-                    collab: "你是团队的“快乐源泉”。你总能敏锐地捕捉到团队气氛的变化，并在大家疲惫时送上鼓励和关心。你相信，好的心情等于成功的一半，一个充满欢声笑语的团队，效率和创造力都会是最高的。", 
-                    tipTitle: "协同技巧：如何化解团队的火药味？", 
-                    tipContent: "用幽默和共情来降温：‘哇，感觉大家的热情都快把电脑点燃了！都别上火，先来块巧克力冷静一下。咱们都是为了项目好，有什么话不能笑着说呢？’", 
-                    stress: "用美好的体验来“覆盖”压力。感到疲惫时，立刻去做一件能让你开心的事：去听一场live show、去逛一个有趣的展览、或者只是在校园里找个长椅看人来人往。你的能量来自于对生活的热爱和体验。", 
-                    growth: "在追求快乐的同时，培养“延迟满足”的能力。尝试完成一个需要长期坚持才能看到结果的任务，比如坚持背单词100天。这个过程会让你发现，通过努力获得的成就感，是一种更深层次的快乐。" 
+                "SKCH": {
+                    title: "职阶：氛围组（创意氛围派）",
+                    traits: ["热情洋溢", "充满创意", "善于激发他人", "好奇心强"],
+                    study: "你的灵感在交流中迸发。在图书馆的讨论区或者宿舍的卧谈会，和别人聊一个学术话题，往往比自己闷头看书一整天收获还大。你的思维是发散性的，擅长从A跳到C，再关联到F，这种“头脑风暴式”学习能帮你找到许多新颖的论文选题和项目创意。",
+                    collab: "你是团队的“首席创意官”。当大家还在纠结于传统方案时，你已经抛出了“我们为什么不做个短视频来展示？”或者“把这个和元宇宙结合怎么样？”这样的颠覆性想法。你擅长用热情和愿景来点燃团队的激情。",
+                    tipTitle: "协同技巧：如何让大家接受你的“疯狂”点子？",
+                    tipContent: "用故事和画面感来包装：‘大家想象一下，如果我们用这个方案，最终呈现的效果就像一部科幻大片，老师看到肯定会眼前一亮！我们可以先花一小时做一个简单的原型，感受一下效果。’",
+                    stress: "警惕“三分钟热度”。当一个创意的新鲜感过去后，你可能会感到乏味。此时，你需要一个“监督伙伴”或者一个公开的承诺（比如发一条朋友圈）来约束自己。把大任务分解成一个个小的创意挑战，用完成小挑战的成就感来为自己持续供能。",
+                    growth: "学会将创意“落地”。一个好的创意不仅要新颖，还要可行。学习一些项目管理的基本方法，为你的创意配备一个可靠的“执行导航”，确保它能从一个闪光的想法，变成一个优秀的作品。"
                 },
-                "SKCH": { 
-                    title: "职阶：氛围组（创意氛围派）", 
-                    traits: ["热情洋溢", "充满创意", "善于激发他人", "好奇心强"], 
-                    study: "你的灵感在交流中迸发。在图书馆的讨论区或者宿舍的卧谈会，和别人聊一个学术话题，往往比自己闷头看书一整天收获还大。你的思维是发散性的，擅长从A跳到C，再关联到F，这种“头脑风暴式”学习能帮你找到许多新颖的论文选题和项目创意。", 
-                    collab: "你是团队的“首席创意官”。当大家还在纠结于传统方案时，你已经抛出了“我们为什么不做个短视频来展示？”或者“把这个和元宇宙结合怎么样？”这样的颠覆性想法。你擅长用热情和愿景来点燃团队的激情。", 
-                    tipTitle: "协同技巧：如何让大家接受你的“疯狂”点子？", 
-                    tipContent: "用故事和画面感来包装：‘大家想象一下，如果我们用这个方案，最终呈现的效果就像一部科幻大片，老师看到肯定会眼前一亮！我们可以先花一小时做一个简单的原型，感受一下效果。’", 
-                    stress: "警惕“三分钟热度”。当一个创意的新鲜感过去后，你可能会感到乏味。此时，你需要一个“监督伙伴”或者一个公开的承诺（比如发一条朋友圈）来约束自己。把大任务分解成一个个小的创意挑战，用完成小挑战的成就感来为自己持续供能。", 
-                    growth: "学会将创意“落地”。一个好的创意不仅要新颖，还要可行。学习一些项目管理的基本方法，为你的创意配备一个可靠的“执行导航”，确保它能从一个闪光的想法，变成一个优秀的作品。" 
+                "SKLH": {
+                    title: "职阶：点子王（创意策略派）",
+                    traits: ["机智善辩", "喜欢挑战", "擅长逻辑推理", "辩论担当"],
+                    study: "“辩论”是你最佳的学习方式。找一个旗鼓相当的“辩友”，就一个知识点进行反复的辩论和质疑，在这个过程中，你的理解会变得无比深刻。你天生擅长“批判性思维”，在读文献时，总能一眼看出作者的逻辑漏洞，这让你能建立更严谨的知识体系。",
+                    collab: "你是团队的“压力测试员”。任何方案在交给你之前，都必须经过深思熟虑，因为你总能找到其中最薄弱的环节。你享受思想的交锋，并能推动团队在不断的“自我否定”中迭代出最强的方案。",
+                    tipTitle: "协同技巧：如何让辩论更高效？",
+                    tipContent: "设定规则并聚焦目标：‘这个辩论很有价值！为了更高效，我们定个规则：每人陈述3分钟，然后自由辩论5分钟，最后的目标是整合出一个更优方案，而不是证明谁对谁错。’",
+                    stress: "你的大脑需要持续的“智力刺激”。感到无聊或压力时，去参加一场辩论赛、玩一局狼人杀或者看一部高分悬疑电影。当你的大脑在另一个战场上高速运转时，学业上的压力自然就烟消云散了。",
+                    growth: "学会“赢了辩论，输了感情”的风险。在坚持逻辑正确的同时，也要考虑对方的感受。有时候，一个不完美但团队所有人都愿意执行的方案，好过一个完美但让一半人感到沮丧的方案。在你的“武器库”里，增加“共情”这个新装备。"
                 },
-                "SKLH": { 
-                    title: "职阶：点子王（创意策略派）", 
-                    traits: ["机智善辩", "喜欢挑战", "擅长逻辑推理", "辩论担当"], 
-                    study: "“辩论”是你最佳的学习方式。找一个旗鼓相当的“辩友”，就一个知识点进行反复的辩论和质疑，在这个过程中，你的理解会变得无比深刻。你天生擅长“批判性思维”，在读文献时，总能一眼看出作者的逻辑漏洞，这让你能建立更严谨的知识体系。", 
-                    collab: "你是团队的“压力测试员”。任何方案在交给你之前，都必须经过深思熟虑，因为你总能找到其中最薄弱的环节。你享受思想的交锋，并能推动团队在不断的“自我否定”中迭代出最强的方案。", 
-                    tipTitle: "协同技巧：如何让辩论更高效？", 
-                    tipContent: "设定规则并聚焦目标：‘这个辩论很有价值！为了更高效，我们定个规则：每人陈述3分钟，然后自由辩论5分钟，最后的目标是整合出一个更优方案，而不是证明谁对谁错。’", 
-                    stress: "你的大脑需要持续的“智力刺激”。感到无聊或压力时，去参加一场辩论赛、玩一局狼人杀或者看一部高分悬疑电影。当你的大脑在另一个战场上高速运转时，学业上的压力自然就烟消云散了。", 
-                    growth: "学会“赢了辩论，输了感情”的风险。在坚持逻辑正确的同时，也要考虑对方的感受。有时候，一个不完美但团队所有人都愿意执行的方案，好过一个完美但让一半人感到沮丧的方案。在你的“武器库”里，增加“共情”这个新装备。" 
+                "SDLG": {
+                    title: "职阶：班长型（高效管理派）",
+                    traits: ["果断干练", "注重效率", "擅长组织管理", "团队领导者"],
+                    study: "你的人生信条是“效率至上”。你会把学习也当成一个项目来管理，制定精确到小时的计划，并严格执行。对你来说，学习不仅要“学进去”，还要能“拿高分”，因此你会格外关注课程的评分标准和老师的偏好，进行针对性复习。",
+                    collab: "你是团队的“总指挥官”。你天生就有一种领袖气质，能快速地分配任务、设定DDL，并推动团队像一台精密的机器一样高效运转。你不能容忍拖延和低效，会直接点出问题所在，确保项目按时交付。",
+                    tipTitle: "协同技巧：如何“硬核”地提升团队执行力？",
+                    tipContent: "公开透明地展示进度和责任人：‘这是我们的项目看板，每个任务的负责人和截止时间都在上面。绿灯表示正常，黄灯表示预警，红灯表示延迟。我们一起努力，争取让它全程绿灯！’",
+                    stress: "警惕“掌控欲”过强带来的疲惫感。学会授权，相信你的队友。把一部分非核心任务交出去，自己只负责把控方向和最终审核。通过高强度的运动，如跑步、撸铁，来释放你内在的领导力压力。",
+                    growth: "从“管理者”升级为“领导者”。管理者强调的是“把事情做对”，而领导者强调的是“做对的事情”。除了关注效率和流程，花更多时间去思考团队的愿景和激励每个人的内在动力，你的团队会爆发出更惊人的能量。"
                 },
-                "SDLG": { 
-                    title: "职阶：班长型（高效管理派）", 
-                    traits: ["果断干练", "注重效率", "擅长组织管理", "团队领导者"], 
-                    study: "你的人生信条是“效率至上”。你会把学习也当成一个项目来管理，制定精确到小时的计划，并严格执行。对你来说，学习不仅要“学进去”，还要能“拿高分”，因此你会格外关注课程的评分标准和老师的偏好，进行针对性复习。", 
-                    collab: "你是团队的“总指挥官”。你天生就有一种领袖气质，能快速地分配任务、设定DDL，并推动团队像一台精密的机器一样高效运转。你不能容忍拖延和低效，会直接点出问题所在，确保项目按时交付。", 
-                    tipTitle: "协同技巧：如何“硬核”地提升团队执行力？", 
-                    tipContent: "公开透明地展示进度和责任人：‘这是我们的项目看板，每个任务的负责人和截止时间都在上面。绿灯表示正常，黄灯表示预警，红灯表示延迟。我们一起努力，争取让它全程绿灯！’", 
-                    stress: "警惕“掌控欲”过强带来的疲惫感。学会授权，相信你的队友。把一部分非核心任务交出去，自己只负责把控方向和最终审核。通过高强度的运动，如跑步、撸铁，来释放你内在的领导力压力。", 
-                    growth: "从“管理者”升级为“领导者”。管理者强调的是“把事情做对”，而领导者强调的是“做对的事情”。除了关注效率和流程，花更多时间去思考团队的愿景和激励每个人的内在动力，你的团队会爆发出更惊人的能量。" 
+                "SDCG": {
+                    title: "职阶：联谊官（和谐统筹派）",
+                    traits: ["友善热情", "善于照顾他人", "重视集体和谐", "团队粘合剂"],
+                    study: "“合作共赢”是你的学习哲学。你会主动组织学习小组，把自己的笔记分享给大家，并乐于为同学讲题。在你看来，大家的共同进步比个人的单打独斗更重要，也更有趣。这种互助的氛围能极大地激发你的学习热情。",
+                    collab: "你是团队的“粘合剂”。你总能用你的热情和同理心，将来自不同背景、性格各异的组员凝聚在一起。你会在项目开始前，先花时间了解每个人的长处和兴趣，然后进行最合理的任务分配，确保每个人都能在团队中发光发热。",
+                    tipTitle: "协同技巧：如何让每个人都有归属感？",
+                    tipContent: "在分配任务时可以这样说：‘我发现你查资料特别快准狠，这个核心部分的文献调研就拜托你了！你上次的PPT做得超棒，这次的视觉呈现部分你来操刀怎么样？’",
+                    stress: "避免成为“老好人”。你的善良和乐于助人可能会让你承担过多不属于你的责任。学会勇敢地说“不”，或者用“我现在手头有点忙，半小时后帮你看看可以吗？”来为自己争取缓冲空间。每周安排“自我关爱日”，只做取悦自己的事。",
+                    growth: "在维护和谐的同时，也要敢于面对冲突。健康的团队需要不同的声音。当出现原则性问题时，你需要学会温和而坚定地表达你的立场，这会让你的善良更有力量，也让你成为一个更值得信赖的协调者。"
                 },
-                "SDCG": { 
-                    title: "职阶：联谊官（和谐统筹派）", 
-                    traits: ["友善热情", "善于照顾他人", "重视集体和谐", "团队粘合剂"], 
-                    study: "“合作共赢”是你的学习哲学。你会主动组织学习小组，把自己的笔记分享给大家，并乐于为同学讲题。在你看来，大家的共同进步比个人的单打独斗更重要，也更有趣。这种互助的氛围能极大地激发你的学习热情。", 
-                    collab: "你是团队的“粘合剂”。你总能用你的热情和同理心，将来自不同背景、性格各异的组员凝聚在一起。你会在项目开始前，先花时间了解每个人的长处和兴趣，然后进行最合理的任务分配，确保每个人都能在团队中发光发热。", 
-                    tipTitle: "协同技巧：如何让每个人都有归属感？", 
-                    tipContent: "在分配任务时可以这样说：‘我发现你查资料特别快准狠，这个核心部分的文献调研就拜托你了！你上次的PPT做得超棒，这次的视觉呈现部分你来操刀怎么样？’", 
-                    stress: "避免成为“老好人”。你的善良和乐于助人可能会让你承担过多不属于你的责任。学会勇敢地说“不”，或者用“我现在手头有点忙，半小时后帮你看看可以吗？”来为自己争取缓冲空间。每周安排“自我关爱日”，只做取悦自己的事。", 
-                    growth: "在维护和谐的同时，也要敢于面对冲突。健康的团队需要不同的声音。当出现原则性问题时，你需要学会温和而坚定地表达你的立场，这会让你的善良更有力量，也让你成为一个更值得信赖的协调者。" 
+                "SKCG": {
+                    title: "职阶：动员家（引领赋能派）",
+                    traits: ["温暖睿智", "善于引导", "有感染力", "善于激发潜力"],
+                    study: "你通过“影响他人”来深化自己的学习。担任课代表、组织读书分享会，或者在学习社群里发表你的见解，这些能让你获得能量。你擅长从宏观角度把握知识体系，并能用生动的语言将其传递出去，是天生的“知识布道者”。",
+                    collab: "你是团队的“首席激励官”。你擅长描绘一个激动人心的“项目愿景”，让每个组员都觉得自己在参与一件了不起的事情。你总能看到别人看不到的潜力，并用“这个任务非你莫属，因为……”来精准地赋能你的队友。",
+                    tipTitle: "协同技巧：如何激发一个感到迷茫的队友？",
+                    tipContent: "用提问代替说教：‘我知道你现在可能有点没头绪，但你之前在XX项目里表现出的那种创造力，正是我们现在最需要的。如果让你来主导这个部分，你觉得第一步可以做什么？’",
+                    stress: "警惕“燃尽自己，照亮别人”。你习惯于承担责任、鼓舞他人，但也要关注自己的能量水平。学会向你信任的朋友或导师“示弱”，倾诉你的压力。通过参与一些能给你带来纯粹快乐的个人爱好，来为自己充电。",
+                    growth: "除了 inspirational (鼓舞人心)，也要学会 operational (可操作)。在描绘了宏大蓝图之后，学习使用一些项目管理工具，帮助团队将愿景分解为可执行的步骤。这将让你的领导力不仅有高度，更有深度和执行力。"
                 },
-                "SKCG": { 
-                    title: "职阶：动员家（引领赋能派）", 
-                    traits: ["温暖睿智", "善于引导", "有感染力", "善于激发潜力"], 
-                    study: "你通过“影响他人”来深化自己的学习。担任课代表、组织读书分享会，或者在学习社群里发表你的见解，这些能让你获得能量。你擅长从宏观角度把握知识体系，并能用生动的语言将其传递出去，是天生的“知识布道者”。", 
-                    collab: "你是团队的“首席激励官”。你擅长描绘一个激动人心的“项目愿景”，让每个组员都觉得自己在参与一件了不起的事情。你总能看到别人看不到的潜力，并用“这个任务非你莫属，因为……”来精准地赋能你的队友。", 
-                    tipTitle: "协同技巧：如何激发一个感到迷茫的队友？", 
-                    tipContent: "用提问代替说教：‘我知道你现在可能有点没头绪，但你之前在XX项目里表现出的那种创造力，正是我们现在最需要的。如果让你来主导这个部分，你觉得第一步可以做什么？’", 
-                    stress: "警惕“燃尽自己，照亮别人”。你习惯于承担责任、鼓舞他人，但也要关注自己的能量水平。学会向你信任的朋友或导师“示弱”，倾诉你的压力。通过参与一些能给你带来纯粹快乐的个人爱好，来为自己充电。", 
-                    growth: "除了 inspirational (鼓舞人心)，也要学会 operational (可操作)。在描绘了宏大蓝图之后，学习使用一些项目管理工具，帮助团队将愿景分解为可执行的步骤。这将让你的领导力不仅有高度，更有深度和执行力。" 
+                "SKLG": {
+                    title: "职阶：组局者（战略领航派）",
+                    traits: ["自信果断", "目标导向", "擅长战略布局", "天生领导者"],
+                    study: "你的学习是“目标驱动”的。在开始任何一门课程前，你都会先明确你的目标：是拿高分、掌握某项技能，还是为了未来的职业发展。然后，你会像一位将军一样，调动所有资源，制定最优策略，直奔目标而去。分析历年真题和考点分布，是你常规的战术动作。",
+                    collab: "你是团队的“CEO”。你天生就拥有掌控全局的视野和果断的决策力。在项目开始时，你会快速明确目标、分配资源、设定里程碑。对于偏离目标的讨论，你会毫不犹豫地叫停，确保团队始终聚焦于最终的胜利。",
+                    tipTitle: "协同技巧：如何处理团队中的反对意见？",
+                    tipContent: "展现自信和开放：‘这个反对意见很有价值，说明我们考虑得还不够周全。我们来做个快速的SWOT分析，对比一下两个方案的优劣。最终，我们将选择那个最有利于我们达成90分以上这个核心目标的方案。’",
+                    stress: "用“赢”来消解压力。当你感到焦虑时，最好的解药就是去完成一个有挑战性的任务并获得胜利。无论是打赢一场关键的游戏，还是攻克一道困扰你很久的难题。定期的高强度运动，如拳击、篮球赛，也是你释放压力的绝佳方式。",
+                    growth: "学习“向下兼容”的智慧。不是所有人都像你一样高效和目标导向。学会理解和激励那些与你风格不同的队友，用他们的优点来补全你的短板。一个伟大的领袖，不仅要跑得快，还要能让整个团队都跟上他的步伐，甚至跑得更快。"
                 },
-                "SKLG": { 
-                    title: "职阶：组局者（战略领航派）", 
-                    traits: ["自信果断", "目标导向", "擅长战略布局", "天生领导者"], 
-                    study: "你的学习是“目标驱动”的。在开始任何一门课程前，你都会先明确你的目标：是拿高分、掌握某项技能，还是为了未来的职业发展。然后，你会像一位将军一样，调动所有资源，制定最优策略，直奔目标而去。分析历年真题和考点分布，是你常规的战术动作。", 
-                    collab: "你是团队的“CEO”。你天生就拥有掌控全局的视野和果断的决策力。在项目开始时，你会快速明确目标、分配资源、设定里程碑。对于偏离目标的讨论，你会毫不犹豫地叫停，确保团队始终聚焦于最终的胜利。", 
-                    tipTitle: "协同技巧：如何处理团队中的反对意见？", 
-                    tipContent: "展现自信和开放：‘这个反对意见很有价值，说明我们考虑得还不够周全。我们来做个快速的SWOT分析，对比一下两个方案的优劣。最终，我们将选择那个最有利于我们达成90分以上这个核心目标的方案。’", 
-                    stress: "用“赢”来消解压力。当你感到焦虑时，最好的解药就是去完成一个有挑战性的任务并获得胜利。无论是打赢一场关键的游戏，还是攻克一道困扰你很久的难题。定期的高强度运动，如拳击、篮球赛，也是你释放压力的绝佳方式。", 
-                    growth: "学习“向下兼容”的智慧。不是所有人都像你一样高效和目标导向。学会理解和激励那些与你风格不同的队友，用他们的优点来补全你的短板。一个伟大的领袖，不仅要跑得快，还要能让整个团队都跟上他的步伐，甚至跑得更快。" 
+                "SKCH": {
+                    title: "职阶：冒险家（实践探索派）",
+                    traits: ["敢闯敢试", "喜欢挑战", "擅长跨界联想", "拒绝循规蹈矩"],
+                    study: "你的学习是一场“未知探索”！不满足于课本内容，会主动去学术网站找前沿论文、在B站看跨界科普视频，甚至尝试用编程、设计等“非专业技能”解决学科问题。比如用Python爬取数据做论文分析，或用PS制作可视化学习笔记，这种“打破常规”的方式能让你收获远超课堂的知识。",
+                    collab: "你是团队的“冒险领航员”。当别人还在纠结传统方案时，你会提出“我们试试和其他专业合作？”“能不能用VR技术呈现成果？”这类突破性想法。你擅长说服大家一起“跳出舒适区”，并愿意承担试错风险，推动团队实现从0到1的创新。",
+                    tipTitle: "协同技巧：如何说服保守的队友尝试新方案？",
+                    tipContent: "用“低风险试错”降低顾虑：‘我们不用完全推翻原方案，先花1天时间做个简易原型测试新想法，如果效果不好，再回到原来的计划，这样既不会浪费太多时间，还能多一个可能性，要不要试试？’",
+                    stress: "当冒险遇到挫折时，启动“复盘迭代”模式。不纠结于失败本身，而是快速分析“哪里出了问题”“下次如何优化”，把每一次试错都变成经验积累。通过户外探险、尝试新运动等活动，保持对“未知”的热情和勇气。",
+                    growth: "学会“冒险风控”。大胆探索的同时，加入理性评估——在提出新想法时，同步给出“风险点”和“应对方案”，让冒险不再是盲目冲动，而是有策略的突破，这样能让更多人愿意跟随你一起探索。"
                 }
             };
-            
+
             const questionContainer = document.getElementById('question-container');
             const progressBar = document.getElementById('progress');
             const prevBtn = document.getElementById('prev-btn');
@@ -867,7 +995,7 @@
             const collaborationTip = document.getElementById('collaboration-tip');
             const stressGuide = document.getElementById('stress-guide');
             const growthGuide = document.getElementById('growth-guide');
-            
+
             let currentQuestion = 0;
             let answers = {};
 
@@ -893,20 +1021,20 @@
                 });
                 showQuestion(0);
             }
-            
+
             function showQuestion(index) {
                 document.querySelectorAll('.question').forEach((q, i) => q.classList.toggle('active', i === index));
                 progressBar.style.width = `${((index + 1) / questions.length) * 100}%`;
                 updateNavigation();
             }
-            
+
             function updateNavigation() {
                 prevBtn.disabled = currentQuestion === 0;
                 const hasAnswer = answers[currentQuestion] !== undefined;
                 nextBtn.innerHTML = currentQuestion === questions.length - 1 ? '生成档案 <i class="fa fa-check"></i>' : '下一轮同步 <i class="fa fa-arrow-right"></i>';
                 nextBtn.disabled = !hasAnswer;
             }
-            
+
             function calculateType() {
                 let counts = { S: 0, Q: 0, D: 0, K: 0, L: 0, C: 0, G: 0, H: 0 };
                 for (let i = 0; i < questions.length; i++) counts[answers[i]]++;
@@ -925,11 +1053,11 @@
                     }
                 }, speed);
             }
-            
+
             function showResult() {
                 const currentPersonalityType = calculateType();
                 const guide = typeGuides[currentPersonalityType];
-                
+
                 typeResult.innerHTML = ''; // Clear before typing
                 setTimeout(() => {
                     typeWriter(typeResult, "宿主代号：" + currentPersonalityType, 150);
@@ -951,7 +1079,7 @@
                     traitEl.classList.add('visible');
                     traitsContainer.appendChild(traitEl);
                 });
-                
+
                 const guideSections = document.querySelectorAll('.guide-section');
                 guideSections.forEach((section, index) => {
                     section.style.animationDelay = `${300 + index * 150}ms`;
@@ -962,16 +1090,16 @@
                 resultSection.style.display = 'block';
                 progressBar.style.width = `100%`;
             }
-            
+
             prevBtn.addEventListener('click', () => {
                 if (currentQuestion > 0) {
                     currentQuestion--;
                     showQuestion(currentQuestion);
                 }
             });
-            
+
             nextBtn.addEventListener('click', () => {
-                if(answers[currentQuestion] === undefined) return;
+                if (answers[currentQuestion] === undefined) return;
                 if (currentQuestion < questions.length - 1) {
                     currentQuestion++;
                     showQuestion(currentQuestion);
@@ -979,15 +1107,15 @@
                     showResult();
                 }
             });
-            
+
             restartBtn.addEventListener('click', () => {
                 currentQuestion = 0;
                 answers = {};
                 document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-                
+
                 document.querySelectorAll('.trait, .guide-section').forEach(el => {
                     el.classList.remove('visible');
-});
+                });
 
                 showQuestion(0);
                 document.querySelector('.test-container').style.display = 'block';
@@ -998,4 +1126,5 @@
         });
     </script>
 </body>
+
 </html>
